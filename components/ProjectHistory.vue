@@ -4,16 +4,12 @@
             MY PROJECT HISTORY
         </h1>
         <p>
-            Below is a list of personal, academic, and professional projects I have worked on
+            Below is a list of the most important personal, academic, and professional engineering projects I have worked on
         </p>
         <div class="grid-logos">
-            <img src="../static/logos/Logo_AssistArm.png" class="logo">
-            <img src="../static/logos/Logo_ECE3SAT.png" class="logo">
-            <img src="..\static\logos\Logo_SAP.png" class="logo">
-            <img src="..\static\logos\Logo_DGA.png" class="logo">
-            <img src="..\static\logos\Logo_Naval.png" class="logo">
-            <img src="..\static\logos\Logo_DasAv.png" class="logo">
-            <img src="..\static\logos\Logo_Walletvote.png" class="logo">
+            <div v-for='(projet, index) in list_logos' :key='index'>
+                <img v-bind:src="source_logos + projet.source + '.png'" class="logo">
+            </div>
         </div>
     </div>
 </template>
@@ -22,7 +18,21 @@
 export default {
     data() {
         return {
+            source_logos: "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/",
+            list_logos: [
+                {source: "Logo_AssistArm"},
+                {source: "Logo_ECE3SAT"},
+                {source: "Logo_SAP"},
+                {source: "Logo_DGA"},
+                {source: "Logo_Naval"},
+                {source: "Logo_DasAv"},
+                {source: "Logo_Walletvote"}
+            ]
         };
+    },
+
+    methods:{
+
     }
 }
 </script>
@@ -35,13 +45,13 @@ export default {
         font-weight: bold;
     }
     p {
-        @apply text-white;
+        @apply text-white text-opacity-80;
         font-family: Arial;
         font-size: 1.25vw;
     }
     .grid-logos {
         @apply grid grid-cols-4 grid-rows-2 p-10 gap-y-6 gap-x-2;
-        padding-right: 20vw;
+        padding-right: 16vw;
     }
     .logo {
         @apply bg-gray_moi-light p-2 m-auto;

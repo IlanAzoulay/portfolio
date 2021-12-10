@@ -99,9 +99,10 @@ export default {
         font-weight: bold;
     }
     h2 {
-        @apply text-white;
+        @apply text-white text-opacity-80;
         font-family: Arial;
         font-size: 1vw;
+        text-align: justify;
     }
     .textbox {
         grid-column-start: 1;

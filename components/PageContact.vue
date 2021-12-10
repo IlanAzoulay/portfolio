@@ -5,17 +5,17 @@
                 Contact me!
             </h1>
             <h2 class="py-4">
-                Apri kommunizmye vsyo budet zaebis
+                I'm open to new job opportunities, project ideas, or anything else!
             </h2>
             <div class="grid grid-cols-3">
                 <div class="col-span-2">
                     <form class=" flex flex-col space-y-6">
                         <div class=" flex flex-row space-x-6">
-                            <input v-model="user.name" type="text_small" placeholder="Moe Lester" required>
-                            <input v-model="user.email" type="email" placeholder="mike-oxmol@protonmail.com" required>
+                            <input v-model="user.name" type="text_small" placeholder="Your name" required>
+                            <input v-model="user.email" type="email" placeholder="youraddress@protonmail.com" required>
                         </div>
-                        <input v-model="user.subject" type="text_small" placeholder="Racism is bad mkay" required>
-                        <textarea v-model="user.message" placeholder="Mi uymiot ne zooparka" required/>
+                        <input v-model="user.subject" type="text_small" placeholder="Subject" required>
+                        <textarea v-model="user.message" placeholder="Hi Ilan! I am writing to you about..." required/>
                     </form>
                 </div>
             </div>

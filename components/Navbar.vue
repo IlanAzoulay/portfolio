@@ -5,20 +5,20 @@
 
         <div class="space-y-0 w-full">
             <div v-for='(button, index) in buttonsTab' :key='index'>
-                <!-- <a :href="`#${button.href}`"> -->
                 <div @click="scrollto(button.href)">
-                <!-- <div :@click="scrollto(button.href)"> -->
                     <div class="button_normal" :class="index === 0 ? 'border-t':''">
                         {{button.title}}
                     </div>
                 </div>
-                <!-- </a> -->
             </div>
         </div>
 
-        <div class="flex flex-row space-x-2 mx-auto">
+        <div class="flex flex-row space-x-1 mx-auto">
             <a href="https://www.youtube.com/c/TheMechanicSharkChannel" target="_blank" rel="noopener noreferrer">
                 <img src="..\static\icons\Icon_Youtube.png" name='Youtube' class="logo">
+            </a>
+            <a href="https://github.com/IlanAzoulay" target="_blank" rel="noopener noreferrer">
+                <img src="..\static\icons\Icon_Github.png" name='LinkedIn' class="logo">
             </a>
             <a href="https://www.linkedin.com/in/ilan-azoulay-197429170" target="_blank" rel="noopener noreferrer">
                 <img src="..\static\icons\Icon_LinkedIn.png" name='LinkedIn' class="logo">
