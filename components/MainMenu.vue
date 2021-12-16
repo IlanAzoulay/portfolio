@@ -1,7 +1,7 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
   <div>
-    <div class="pageBackground relative w-full flex flex-col px-3 py-10 items-center text-center min-h-screen space-y-0">
+    <div class="pageBackground relative w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0">
       
       <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12">
 

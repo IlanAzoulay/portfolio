@@ -5,7 +5,7 @@
             <img src="..\static\icons\Icon_UK_flag.png" v-if="english === true" @click="change_language" class="flag">
             <img src="..\static\icons\Icon_France_flag.png" v-else @click="change_language" class="flag">
         </div> -->
-        <div class="flex flex-row space-x-4 justify-center py-4">
+        <div class="flex flex-row space-x-4 justify-center py-8">
             <!-- <element v-bind:class = "(condition)?'class_if_is_true':'else_class'"></element> -->
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_UK_flag.png" class="flag" v-bind:class="english?'flag-selected':'flag-unselected'"
                 @click="english = true">

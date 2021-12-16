@@ -15,7 +15,11 @@
                     <div class="logo_box" ontouchstart="">
                         <img v-bind:src="projets.source_logos + logo.filename + '.png'" class="logo">
                         <h2 class="project_details">
-                            Ceci est un test
+                            <b>{{logo.title}}</b>
+                            <br><em>({{logo.year}})</em>
+                            <h3>- {{logo.post}} -</h3>
+                            <h3>{{logo.description}}</h3>
+                            <h3><em>({{logo.environment}})</em></h3>
                         </h2>
                     </div>
                 </div>
@@ -95,8 +99,8 @@ export default {
         @apply m-auto opacity-100 p-2;
         transition: all calc(var(--transition-time) * 1s);
     }
-    .logo:hover {
-        @apply opacity-10;
+    .logo_box:hover .logo {
+        @apply opacity-5;
     }
     .project_details {
         @apply text-white text-center;
@@ -106,11 +110,16 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: Arial;
+        font-size: 1vw;
+        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
         transition: all calc(var(--transition-time) * 1s);
     }
     .logo_box:hover .project_details {
         @apply opacity-100;
         /* @apply opacity-100; */
+    }
+    h3 {
+        padding-top: 1vh;
     }
     
 </style>

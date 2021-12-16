@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-gray_moi min-h-screen pb-20">
+    <div class="bg-gray_moi min-h-screen">
 
-        <div class="grid grid-cols-6 grid-rows-6 ">
+        <div class="grid_big" style="padding-top:4vh; padding-left: 5vw;">
 
             <!-- textes -->
-            <div class="textbox px-8 pl-14">
+            <div class="textbox">
                 <h1>
                     MY ENGINEERING PORTFOLIO
                 </h1>
@@ -32,10 +32,10 @@
                         </ul>
                         <!-- Colonne 2 -->
                         <ul class="space-y-0.5">
-                            <li>C, C++, Python, Java, VBA, SQL</li>
+                            <li>C, C++, Python, Java, VBA, SQL, HTML/CSS/Javascript</li>
                             <li>Linux, Arduino, Microcontrollers (PIC), Raspberry Pi, STM32</li>
                             <li>Blender, Cinema 4D, Solidworks, OpenGL</li>
-                            <li>Qt, java Windowbuilder</li>
+                            <li>Nuxt JS, Qt, java Windowbuilder</li>
                             <li>Wi-fi, Bluetooth/BLE, UART</li>
                             <li>Git, JSON, bpy</li>
                         </ul>
@@ -46,37 +46,33 @@
 
             <!-- photos a droite -->
             <div  class="pics-right">
-                <div class="grid grid-rows-2">
-                    <div class="row-span-1 picture">
-                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Naval.png">
-                        Image generated autonomously and randomly 
-                        <em>(Python, Blender)</em>
-                    </div>
-                    <div class="row-span-1 picture">
-                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_OpenGL.png">
-                        Simulation to test the stabilisation algorithm of a cubesat nanosatellite<br>
-                        <em>(Java, OpenGL, windowBuilder)</em>
-                    </div>
-                    
+                <div class="grid_right">
+                    <div v-for='(pic, index) in pics.right' :key='index' class="picture_superbox">
+                        <div class="picture_box">
+                            <img v-bind:src="pics.source_pics + pic.filename + '.png'" class="picture">
+                            <h3>
+                                {{pic.description}}
+                                <br><em>{{pic.env}}</em>
+                            </h3>
+                        </div>
+                        
+                    </div>                    
                 </div>
-                
             </div>
 
             <!-- photos en bas -->
             <div  class="pics-bottom">
-                <div class="grid grid-cols-3">
-                    <div class="row-span-1 picture">
-                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_DefiH.png ">
-                        Presentation of the Assist'Arm project to Défi H 2018 competition
-                    </div>
-                    <div class="row-span-1 picture">
-                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Arm.png">
-                        Assist'Arm semi-autonomously guided robotic arm
-                    </div>
-                    <div class="row-span-1 picture">
-                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Cubesat.png">
-                        Construction to simulate magnetic fields around the nanosatellite
-                    </div>
+                <div class="grid_bottom">
+                    <div v-for='(pic, index) in pics.bottom' :key='index' class="picture_superbox">
+                        <div class="picture_box">
+                            <img v-bind:src="pics.source_pics + pic.filename + '.png'" class="picture">
+                            <h3>
+                                {{pic.description}}
+                                <br><em>{{pic.env}}</em>
+                            </h3>
+                        </div>
+                        
+                    </div>                    
                 </div>
             </div>
 
@@ -86,8 +82,21 @@
 
 
 <script>
+import data from '~/static/data/data.json'
+
 export default {
-    
+    data() {
+        return {
+            pics: data.presentation_pics
+        };
+    },
+
+    beforeMount() {
+        let root = document.documentElement;
+        root.style.setProperty('--box-size', 20);
+        root.style.setProperty('--box-grow', 0.1);
+        root.style.setProperty('--transition-time', 0.5);
+    }
 }
 </script>
 
@@ -104,27 +113,81 @@ export default {
         font-size: 1vw;
         text-align: justify;
     }
+    .grid_big {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        column-gap: 0px;
+        row-gap: 2vh;
+    }
     .textbox {
         grid-column-start: 1;
-        grid-column-end: 5;
+        grid-column-end: 3;
         grid-row-start: 1;
-        grid-row-end: 5;
+        grid-row-end: 3;
     }
     .pics-right {
-        grid-column-start: 5;
-        grid-column-end: 7;
+        grid-column-start: 3;
+        grid-column-end: 4;
         grid-row-start: 1;
-        grid-row-end: 5;
+        grid-row-end: 3;
+    }
+    .grid_right {
+        @apply content-center;
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        row-gap: 2vh;
+        height: 100%;
+        width: 100%;
+    }
+    .grid_bottom {
+        @apply content-center;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(1, minmax(0, 1fr));
+        column-gap: 2vw;
+        height: 100%;
+        width: 100%;
     }
     .pics-bottom {
         grid-column-start: 1;
-        grid-column-end: 7;
-        grid-row-start: 5;
-        grid-row-end: 7;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+    .picture_superbox{
+        width: calc(var(--box-size) * 1vw);
+        height: calc(var(--box-size) * 1vh);
+        margin: 0 0;
+    }
+    .picture_box{
+        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
+        height: calc(var(--box-size) * (1 - var(--box-grow)) * 1vh);
+        position: relative;
+        top: calc(var(--box-size) * (var(--box-grow)/2) * 1vh);
+        left: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .picture_box:hover {
+        top: 0;
+        left: 0;
+        width: calc(var(--box-size) * 1vw);
+        height: calc(var(--box-size) * 1vh);
     }
     .picture {
-        @apply mx-auto my-auto w-72 text-white text-opacity-75 text-center py-3;
+        @apply mx-auto my-auto;
+        /* width: 90%; */
+        transition: all 0.5s;
+    }
+    h3 {
+        @apply text-white text-opacity-75 text-center px-0;
         font-family: Arial;
         font-size: 0.85vw;
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .picture_box:hover h3 {
+        padding-left: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        padding-right: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
     }
 </style>

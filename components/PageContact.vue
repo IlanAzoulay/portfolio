@@ -1,10 +1,10 @@
 <template>
     <div class="bg-gray_moi min-h-screen">
-        <div class="px-14 py-10">
+        <div style="padding-left: 4vw; padding-top: 7vh;">
             <h1>
                 Contact me!
             </h1>
-            <h2 class="py-4">
+            <h2 style="padding-top:2vh; padding-bottom:3vh;">
                 I'm open to new job opportunities, project ideas, or anything else!
             </h2>
             <div class="grid grid-cols-3">
