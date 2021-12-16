@@ -48,12 +48,12 @@
             <div  class="pics-right">
                 <div class="grid grid-rows-2">
                     <div class="row-span-1 picture">
-                        <img src="..\static\res\Preview_Naval.png">
+                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Naval.png">
                         Image generated autonomously and randomly 
                         <em>(Python, Blender)</em>
                     </div>
                     <div class="row-span-1 picture">
-                        <img src="..\static\res\Preview_OpenGL.png">
+                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_OpenGL.png">
                         Simulation to test the stabilisation algorithm of a cubesat nanosatellite<br>
                         <em>(Java, OpenGL, windowBuilder)</em>
                     </div>
@@ -66,15 +66,15 @@
             <div  class="pics-bottom">
                 <div class="grid grid-cols-3">
                     <div class="row-span-1 picture">
-                        <img src="..\static\res\Preview_DefiH.png">
+                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_DefiH.png ">
                         Presentation of the Assist'Arm project to Défi H 2018 competition
                     </div>
                     <div class="row-span-1 picture">
-                        <img src="..\static\res\Preview_Arm.png">
+                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Arm.png">
                         Assist'Arm semi-autonomously guided robotic arm
                     </div>
                     <div class="row-span-1 picture">
-                        <img src="..\static\res\Preview_Cubesat.png">
+                        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_Cubesat.png">
                         Construction to simulate magnetic fields around the nanosatellite
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center space-y-6 py-6 bg-gray_moi-dark min-h-screen">
 
-        <img src="..\static\icons\Icon_A.png" name='A' class="mx-auto w-36 cursor-pointer" @click="scrollto('home')">
+        <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_A.png" name='A' class="mx-auto w-36 cursor-pointer" @click="scrollto('home')">
 
         <div class="space-y-0 w-full">
             <div v-for='(button, index) in buttonsTab' :key='index'>
@@ -15,13 +15,13 @@
 
         <div class="flex flex-row space-x-1 mx-auto">
             <a href="https://www.youtube.com/c/TheMechanicSharkChannel" target="_blank" rel="noopener noreferrer">
-                <img src="..\static\icons\Icon_Youtube.png" name='Youtube' class="logo">
+                <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_Youtube.png" name='Youtube' class="logo">
             </a>
             <a href="https://github.com/IlanAzoulay" target="_blank" rel="noopener noreferrer">
-                <img src="..\static\icons\Icon_Github.png" name='LinkedIn' class="logo">
+                <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_Github.png" name='LinkedIn' class="logo">
             </a>
             <a href="https://www.linkedin.com/in/ilan-azoulay-197429170" target="_blank" rel="noopener noreferrer">
-                <img src="..\static\icons\Icon_LinkedIn.png" name='LinkedIn' class="logo">
+                <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_LinkedIn.png" name='LinkedIn' class="logo">
             </a>
         </div>
     </div>

@@ -7,9 +7,9 @@
         </div> -->
         <div class="flex flex-row space-x-4 justify-center py-4">
             <!-- <element v-bind:class = "(condition)?'class_if_is_true':'else_class'"></element> -->
-            <img src="..\static\icons\Icon_UK_flag.png" class="flag" v-bind:class="english?'flag-selected':'flag-unselected'"
+            <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_UK_flag.png" class="flag" v-bind:class="english?'flag-selected':'flag-unselected'"
                 @click="english = true">
-            <img src="..\static\icons\Icon_France_flag.png" class="flag" v-bind:class="!english?'flag-selected':'flag-unselected'"
+            <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_France_flag.png" class="flag" v-bind:class="!english?'flag-selected':'flag-unselected'"
                 @click="english = false">
         </div>
 
