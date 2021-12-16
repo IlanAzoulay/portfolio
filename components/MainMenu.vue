@@ -41,55 +41,6 @@
   </div>
 </template>
 
-
-<style scoped>
-  h1 {
-    @apply text-cyan;
-    font-family: Arial;
-    font-weight: bold;
-    font-size: 3vw;
-  }
-  h2 {
-    @apply  text-cyan;
-    font-family: Arial;
-    font-weight: normal;
-    opacity: 0.75;
-    font-size: 1.5vw;
-  }
-  .pageBackground {
-    @apply bg-gray_moi;
-  }
-
-  .button_futurist{
-    /* @apply pour faire le tailwind */
-    @apply px-14 py-1 text-cyan hover:text-gray_moi;
-    @apply cursor-pointer border-cyan border-2 space-y-10;
-    font-family: Arial;
-    font-weight: normal;
-    font-size: 1.5vw;
-    display: block;
-    background: linear-gradient(to right, cyan 50%, transparent 50%);
-    background-position: right center;
-    background-size: 200% 200%;
-    transition: all .5s ease-out;
-  }
-  .button_futurist:hover {
-    background-position: left center;
-    box-shadow: 0 0 0.5vw cyan; /* Glow */
-    transition: all .5s ease-out;
-  }
-
-  .scroll_arrow{
-    @apply cursor-pointer text-white;
-    font-family: Arial;
-    font-size: 1vw;
-    position: absolute;
-    bottom: 2vh;
-    opacity: var(--scroll-arrow-opacity);
-  }
-</style>
-
-
 <script>
 /* a l'interieur d'ici se trouve du javascript */
 
@@ -157,3 +108,51 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+  h1 {
+    @apply text-cyan;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 3vw;
+  }
+  h2 {
+    @apply  text-cyan;
+    font-family: Arial;
+    font-weight: normal;
+    opacity: 0.75;
+    font-size: 1.5vw;
+  }
+  .pageBackground {
+    @apply bg-gray_moi;
+  }
+
+  .button_futurist{
+    /* @apply pour faire le tailwind */
+    @apply px-14 py-1 text-cyan hover:text-gray_moi;
+    @apply cursor-pointer border-cyan border-2 space-y-10;
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 1.5vw;
+    display: block;
+    background: linear-gradient(to right, cyan 50%, transparent 50%);
+    background-position: right center;
+    background-size: 200% 200%;
+    transition: all .5s ease-out;
+  }
+  .button_futurist:hover {
+    background-position: left center;
+    box-shadow: 0 0 0.5vw cyan; /* Glow */
+    transition: all .5s ease-out;
+  }
+
+  .scroll_arrow{
+    @apply cursor-pointer text-white;
+    font-family: Arial;
+    font-size: 1vw;
+    position: absolute;
+    bottom: 2vh;
+    opacity: var(--scroll-arrow-opacity);
+  }
+</style>

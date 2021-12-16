@@ -5,34 +5,45 @@
         </h1>
         <p>
             Below is a list of the most important personal, academic, and professional engineering projects I have worked on
+            <br><em>(hover for details)</em>
         </p>
         <div class="grid-logos">
-            <div v-for='(projet, index) in list_logos' :key='index'>
-                <img v-bind:src="source_logos + projet.source + '.png'" class="logo">
+            <div v-for='(logo, index) in projets.list_logos' :key='index'>
+                <!-- <img v-bind:src="projets.source_logos + logo.filename + '.png'" class="logo" :id="`${logo.filename}`" -->
+                    <!-- :class="{highlight:logo.filename == selected}" @click="selected = logo.filename"> -->
+                <div class="logo_superbox">
+                    <div class="logo_box" ontouchstart="">
+                        <img v-bind:src="projets.source_logos + logo.filename + '.png'" class="logo">
+                        <h2 class="project_details">
+                            Ceci est un test
+                        </h2>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import data from '~/static/data/data.json'
+
 export default {
     data() {
         return {
-            source_logos: "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/",
-            list_logos: [
-                {source: "Logo_AssistArm"},
-                {source: "Logo_ECE3SAT"},
-                {source: "Logo_SAP"},
-                {source: "Logo_DGA"},
-                {source: "Logo_Naval"},
-                {source: "Logo_DasAv"},
-                {source: "Logo_Walletvote"}
-            ]
+            projets: data.projets,
+            selected: undefined
         };
     },
 
-    methods:{
+    beforeMount() {
+        let root = document.documentElement;
+        root.style.setProperty('--box-size', 17);
+        root.style.setProperty('--box-grow', 0.1);
+        root.style.setProperty('--transition-time', 0.5);
+    },
 
+    methods:{
     }
 }
 </script>
@@ -50,17 +61,56 @@ export default {
         font-size: 1.25vw;
     }
     .grid-logos {
-        @apply grid grid-cols-4 grid-rows-2 p-10 gap-y-6 gap-x-2;
-        padding-right: 16vw;
+        @apply grid grid-cols-4 grid-rows-2 py-3;
+        padding-right: 8vw;
+        padding-left: 2vw;
+        row-gap: 0vh;
+        column-gap: 0vw;
     }
-    .logo {
-        @apply bg-gray_moi-light p-2 m-auto;
+    .logo_superbox {
+        width: calc(var(--box-size) * 1vw);
+        height: calc(var(--box-size) * 1vw);
+    }
+    .logo_box {
+        @apply bg-gray_moi-light m-auto;
+        @apply text-opacity-0 text-white;
         box-shadow: 0 0 0.25vw white;
-        height: 90%;
-        transition: all 0.5s;
+        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
+        height: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
+        position: relative;
+        top: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        transition: all calc(var(--transition-time) * 1s);
     }
-    .logo:hover {
-        height: 100%;
+    .logo_box:hover {
+        @apply text-opacity-100;
+        top: 0vw;
+        width: calc(var(--box-size) * 1vw);
+        height: calc(var(--box-size) * 1vw);
         box-shadow: 0 0 1vw cyan;
     }
+    /* .logo.highlight {
+         @apply bg-red-500;
+    } */
+    .logo {
+        @apply m-auto opacity-100 p-2;
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .logo:hover {
+        @apply opacity-10;
+    }
+    .project_details {
+        @apply text-white text-center;
+        @apply opacity-0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial;
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .logo_box:hover .project_details {
+        @apply opacity-100;
+        /* @apply opacity-100; */
+    }
+    
 </style>

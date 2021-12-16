@@ -10,8 +10,11 @@
             </p>
 
             <div class="grid-thumbnails">
-                <div v-for='(mini, index) in thumbnails' :key='index'>
-                    <img v-bind:src="source_thumbnails + mini.filename + '.png'" class="thumbnail">
+                <div v-for='(mini, index) in thumbnails.miniatures' :key='index'>
+                    <div>
+                        <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail">
+                        <h2>{{mini.title}} <em class="opacity-80">({{mini.year}})</em></h2>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,21 +22,16 @@
 </template>
 
 <script>
+import data from '~/static/data/data.json'
+
 export default {
     data() {
         return {
-            source_thumbnails: "../static/thumbnails/Thumbnail_",
-            thumbnails: [
-                {filename: 'Censor'},
-                {filename: 'Emu'},
-                {filename: 'Fman'},
-                {filename: 'India'},
-                {filename: 'Ancap'},
-                {filename: 'HK'},
-                {filename: 'Ben'},
-                {filename: 'Letov'}
-            ]
+            thumbnails: data.filmography
         };
+    },
+
+    methods: {
     }
 }
 </script>
@@ -46,9 +44,12 @@ export default {
         font-weight: bold;
     }
     h2 {
-        @apply text-cyan text-opacity-60;
+        @apply text-white text-opacity-100 mx-auto w-full px-0 py-2;
         font-family: Arial;
-        font-size: 1.25vw;
+        font-size: 1vw;
+        /* display: inline-block; */
+        text-align: center;
+        /* font-weight: bold; */
     }
     p{
         @apply text-white text-opacity-80;
@@ -56,11 +57,12 @@ export default {
         font-size: 1.25vw;
     }
     .grid-thumbnails {
-        @apply grid grid-cols-4 grid-rows-2 p-10 gap-y-6 gap-x-2;
-        padding-right: 16vw;
+        @apply w-full h-full;
+        @apply grid grid-cols-4 grid-rows-2 py-10 gap-y-6 gap-x-4;
+        padding-right: 10vw;
     }
     .thumbnail {
-        @apply bg-gray_moi-light p-2 m-auto;
+        @apply bg-gray_moi-light m-auto;
         box-shadow: 0 0 0.25vw white;
         height: 90%;
         transition: all 0.5s;

@@ -1,0 +1,96 @@
+{
+    "filmography": {
+        "source_thumbnails": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/thumbnails/Thumbnail_",
+        "miniatures": [
+            {
+            "filename": "Censor",
+			"title": "The Chinese Censorship Song",
+            "year": "2020",
+            "description": "test"
+            },
+            {
+            "filename": "Emu",
+			"title": "Emu War: The Movie",
+            "year": "2019",
+            "description": "test"
+            },
+            {
+            "filename": "Fman",
+			"title": "Florida Man: The Movie",
+            "year": "2020",
+            "description": "test"
+            },
+            {
+            "filename": "India",
+			"title": "Indian Tutorial Guy: The Movie",
+            "year": "2020",
+            "description": "test"
+            },
+            {
+            "filename": "Ancap",
+			"title": "Anarcho-Capitalism: The Movie",
+            "year": "2018",
+            "description": "test"
+            },
+            {
+            "filename": "HK",
+			"title": "Liberty Prime Liberates Hong Kong",
+            "year": "2019",
+            "description": "test"
+            },
+            {
+            "filename": "Ben",
+			"title": "Ben Shapiro: The Movie",
+            "year": "2020",
+            "description": "test"
+            },
+            {
+            "filename": "Letov",
+			"title": "This Is For Your Own Good",
+            "year": "2021",
+            "description": "test"
+            }
+        ]
+    },
+
+    "projets": {
+        "source_logos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
+        "list_logos": [
+            {
+            "filename": "AssistArm",
+            "year": "2018",
+            "description": "test"
+            },
+            {
+            "filename": "ECE3SAT",
+            "year": "2019",
+            "description": "test"
+            },
+            {
+            "filename": "SAP",
+            "year": "2016-2017",
+            "description": "test"
+            },
+            {
+            "filename": "DGA",
+            "year": "2018",
+            "description": "test"
+            },
+            {
+            "filename": "Naval",
+            "year": "2019",
+            "description": "test"
+            },
+            {
+            "filename": "DasAv",
+            "year": "2021",
+            "description": "test"
+            },
+            {
+            "filename": "Walletvote",
+            "year": "2020",
+            "description": "test"
+            }
+        ]
+    }
+}
