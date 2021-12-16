@@ -3,7 +3,7 @@
   <div>
     <div class="pageBackground relative w-full flex flex-col px-3 py-10 items-center text-center min-h-screen space-y-0">
       
-      <img src="..\static\BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12">
+      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12">
 
       <div class="flex flex-col space-y-0">
         <h1 class="text-center">
@@ -31,7 +31,7 @@
           <!-- on va repeter la fleche 2 fois, pour le fun -->
           <div class="flex flex-row space-x-5 justify-center">
             <div v-for="i in 2" :key="i">
-              <img src="..\static\icons\Icon_arrow_down.png" class="w-6 animate-bounce">
+              <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_arrow_down.png" class="w-6 animate-bounce">
             </div>
           </div>
       </div>
