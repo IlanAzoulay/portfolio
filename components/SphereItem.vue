@@ -13,19 +13,16 @@
 export default {
     props: {
         text: String,
-        input_theta: Number,
-        input_phi: Number,
         index: Number,
         number_items: Number,
-        radius: Number
+        radius: Number,
+        rotation_matrix: Array
     },
     data() {
         return {
             pos_x: 0,
             pos_y: 0,
             pos_z: 0,
-            offset_theta: 0,
-            offset_phi: 0,
             angle_theta: 0,
             angle_phi: 0,
             blur_max: 0.1,
@@ -36,20 +33,17 @@ export default {
     },
 
     mounted() {
-        this.set_starting_angle();
-        this.update_pos();
+        this.set_starting_points();
     },
 
     // Activates when prop changes
     watch: {
-        "input_theta": function(val, oldVal) {
-            this.update_theta();
-            this.update_pos();
-            console.log("Index: ", this.index, "\t Phi:", this.to_degrees(this.angle_phi),"\t theta: ", this.to_degrees(this.angle_theta));
-        },
-        "input_phi": function(val, oldVal) {
-            this.update_phi();
-            this.update_pos();
+        // "input_phi": function(val, oldVal) {
+        //     this.update_phi();
+        //     this.update_pos();
+        // }
+        "rotation_matrix": function() {
+            this.rotate_pos();
         }
     },
 
@@ -61,33 +55,32 @@ export default {
             return radians * (180.0/Math.PI);
         },
 
-        update_theta(){
-            // Theta entre 0 et 180
-            this.angle_theta = this.to_radians(this.offset_theta + this.input_theta);            
-        },
-        update_phi(){
-            // Phi entre 0 et 360
-            this.angle_phi = this.to_radians(this.offset_phi + this.input_phi);
-        },
-        update_pos(){
-            this.pos_x = this.get_pos_x();
-            this.pos_y = this.get_pos_y();
-            this.pos_z = this.get_pos_z();
+        /* multiply current coordinates with Euler matrix */
+        rotate_pos(){
+            var x = this.pos_x;
+            var y = this.pos_y;
+            var z = this.pos_z;
+
+            this.pos_x = this.rotation_matrix[0][0] * x + this.rotation_matrix[0][1] * y + this.rotation_matrix[0][2] * z;
+            this.pos_y = this.rotation_matrix[1][0] * x + this.rotation_matrix[1][1] * y + this.rotation_matrix[1][2] * z;
+            this.pos_z = this.rotation_matrix[2][0] * x + this.rotation_matrix[2][1] * y + this.rotation_matrix[2][2] * z;
         },
 
-        set_starting_angle(){
+        /* set initial angles and coordinates at the very beginning */
+        set_starting_points(){
 
-            // EXTREME LEARNING
+            // source: EXTREME LEARNING
             var goldenRatio = (1 + Math.sqrt(5))/2;
             this.angle_phi = this.to_degrees( 2 * Math.PI * this.index / goldenRatio );
             this.angle_theta = this.to_degrees( Math.acos(1 - 2*(this.index+0.5)/ this.number_items));
             // x, y, z = cos(phi) * sin(theta), sin(theta) * sin(phi), cos(theta);
 
-            this.offset_theta = this.angle_theta;
-            this.offset_phi = this.angle_phi;
-
             this.angle_theta = this.to_radians(this.angle_theta);
             this.angle_phi = this.to_radians(this.angle_phi);
+
+            this.pos_x = this.radius * Math.cos(this.angle_phi) * Math.sin(this.angle_theta);
+            this.pos_y = this.radius * Math.sin(this.angle_phi) * Math.sin(this.angle_theta);
+            this.pos_z = this.radius * Math.cos(this.angle_theta);
         },
 
         get_top(){
@@ -95,16 +88,6 @@ export default {
         },
         get_left(){
             return this.radius + this.pos_y;
-        },
-
-        get_pos_x(){
-            return this.radius * Math.cos(this.angle_phi) * Math.sin(this.angle_theta);  // Wiki
-        },
-        get_pos_y(){
-            return this.radius * Math.sin(this.angle_phi) * Math.sin(this.angle_theta); // Wiki
-        },
-        get_pos_z(){
-            return this.radius * Math.cos(this.angle_theta);  // Wiki
         },
 
         get_linear_value(coord, min, max) {
