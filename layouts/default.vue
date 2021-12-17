@@ -1,18 +1,11 @@
 <template>
-    <!-- <div :class="`grid grid-cols-${nombre_col} grid-rows-1`"> -->
     <div class="grid_all">
 
-        <!-- Barre a gauche -->
-        <!-- <div class="col-span-1">
-            <!-- <Navbar @scrollTo="goto" :class="`fixed w-1/${nombre_col}`" /> -->
-            <!-- <Navbar :class="`fixedBar w-1/${nombre_col}`"/> -->
-        <!-- </div> --> -->
         <div class="gauche">
             <Navbar class="fixedBar"/>
         </div>
 
         <!-- Le reste a droite -->
-        <!-- <Nuxt :class="`col-span-${(nombre_col-1)}`" /> -->
         <Nuxt class="droite"/>
         
     </div>
