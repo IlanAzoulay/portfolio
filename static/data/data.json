@@ -154,5 +154,18 @@
                 "env": ""
             }
         ]
-    }
+    },
+    "sphere_items": [
+        "Robotics",
+        "Software",
+        "3D Dev",
+        "Interface",
+        "Firmware",
+        "Front-end",
+        "Algorithms",
+        "Procedural",
+        "Database",
+        "3D Design",
+        "Electronics"
+    ]
 }

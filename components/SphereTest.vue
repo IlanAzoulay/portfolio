@@ -1,21 +1,10 @@
 <template>
     <div class="pl-6 bg-gray_moi min-h-screen">
         <h1 class="">TEST</h1>
-        <div class="bouton" @click="move_left">
-            LEFT
-        </div>
-        <div class="bouton" id="bouton_r" @click="move_right">
-            RIGHT
-        </div>
-        <div class="bouton" id="bouton_r" @click="move_front">
-            FRONT
-        </div>
-        <div class="bouton" id="bouton_r" @click="move_back">
-            BACK
-        </div>
         <!-- Le positionnement RELATIVE permet aux objets enfant de se positionner de maniere relative -->
-        <!-- <div class="relative p-16" id="sphere"> -->
-        <div class="relative w-screen h-screen bg-gray_moi-light" id="sphere">
+        <!-- <div class="relative w-screen h-screen bg-gray_moi-light" id="sphere"> -->
+        <div class="relative bg-gray_moi-light" id="sphere" @mouseenter="start_roll" @mousemove="update_roll" @mouseleave="end_roll"
+            :style="`width: ${radius*2}vw; height: ${radius*2}vw;`">
             <SphereItem
                 class="absolute top-0 left-0"
                 v-for='(item, index) in list' :key='index'
@@ -25,7 +14,6 @@
                 :radius="radius"
                 :rotation_matrix="rotation_matrix"
                  />
-            <!-- <span class="absolute dot"></span> -->
         </div>
     </div>
 </template>
@@ -33,6 +21,7 @@
 
 <script>
 import SphereItem from "@/components/SphereItem.vue";
+import data from '~/static/data/data.json'
 
 export default {
     components: {
@@ -40,14 +29,23 @@ export default {
     },
     data() {
         return {
-            radius: 10,
+            active: false,
+            timer: undefined,
+            interval: 10,  // milliseconds
+            radius: 12,
             rotation_matrix: undefined,
-            list: ['10', '20', '30', '40', '50', '60', '70', '80', '90']
+            // list: ['10', '20', '30', '40', '50', '60', '70', '80', '90'],
+            list: data.sphere_items,
+            mouse_x: 0,
+            mouse_y: 0,
+            center_x: undefined,
+            center_y: undefined,
+            vitesse_max: 1 // degrees
         };
     },
 
     beforeMount(){
-        this.rotation_matrix = this.get_euler_matrix(0, 0, 0);
+        this.rotation_matrix = this.get_euler_matrix(0, 0, 0);  // Initialize Euler matrix
     },
 
     methods:{
@@ -93,19 +91,50 @@ export default {
             ]
 
         },
-        move_left(){
-            this.rotation_matrix = this.get_euler_matrix(0, 0, -10);
+
+        start_roll(event){
+            this.active = true;
+            this.mouse_x = event.clientX;
+            this.mouse_y = event.clientY;
+
+            // Get coord of element (in pixels)
+            var composant = document.getElementById("sphere").getBoundingClientRect();
+            this.center_x = composant.left + composant.width / 2;
+            this.center_y = composant.top + composant.height / 2;
+
+            var ref = this;  // IMPORTANT pour eviter un mismatch de "this"
+            this.timer = setInterval( function() { 
+                ref.sphere_roll(composant.left, composant.top, composant.width, composant.height);
+            }, this.interval);
         },
-        move_right(){
-            this.rotation_matrix = this.get_euler_matrix(0, 0, 10);
+        end_roll(){
+            this.active = false;
+            clearInterval(this.timer);
         },
-        move_front(){
-            this.rotation_matrix = this.get_euler_matrix(0, 10, 0);
+        update_roll(event) {
+            if (this.active) {
+                this.mouse_x = event.clientX;
+                this.mouse_y = event.clientY;
+            }
         },
-        move_back(){
-            this.rotation_matrix = this.get_euler_matrix(0, -10, 0);
+        sphere_roll(left, top, width, height){
+            // Directions des AXES: Z vers le haut - Y vers la droite - X vers nous
+            // Rotations: Autour de Z pour gauche-droite - Autour de Y pour haut-bas
+
+            var move = this.get_sphere_movement(left, top, width, height)
+
+            this.rotation_matrix = this.get_euler_matrix(0, move[1], move[0]);
+        },
+        get_sphere_movement(left, top, width, height){
+            return [
+                this.get_speed(left, width, this.mouse_x),
+                (-1)*this.get_speed(top, height, this.mouse_y)
+            ];
+        },
+        get_speed(coord_start, size, mouse){
+            // More or less fast depending on how far from the center
+            return 2*(this.vitesse_max / size) * (mouse - coord_start - (size/2));
         }
-        
     },
 
 }
@@ -126,12 +155,5 @@ export default {
     .bouton {
         @apply cursor-pointer text-white py-2;
         font-family: Arial;
-    }
-    .dot {
-        @apply bg-gray_moi-alt opacity-25;
-        height: 20vw;
-        width: 20vw;
-        border-radius: 50%;
-        display: inline-block;
     }
 </style>

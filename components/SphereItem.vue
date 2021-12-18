@@ -20,6 +20,7 @@ export default {
     },
     data() {
         return {
+            /* positions x, y, et z entre -1 et 1. Seront multiplies par Rayon ensuite */
             pos_x: 0,
             pos_y: 0,
             pos_z: 0,
@@ -27,7 +28,7 @@ export default {
             angle_phi: 0,
             blur_max: 0.1,
             size_min: 1,
-            size_max: 2.5,
+            size_max: 2,
             opacity_min: 0.5
         };
     },
@@ -64,6 +65,11 @@ export default {
             this.pos_x = this.rotation_matrix[0][0] * x + this.rotation_matrix[0][1] * y + this.rotation_matrix[0][2] * z;
             this.pos_y = this.rotation_matrix[1][0] * x + this.rotation_matrix[1][1] * y + this.rotation_matrix[1][2] * z;
             this.pos_z = this.rotation_matrix[2][0] * x + this.rotation_matrix[2][1] * y + this.rotation_matrix[2][2] * z;
+
+            // TODO: verifier que ca depasse pas 1
+            if (this.pos_x > 1){this.pos_x = 1;}
+            if (this.pos_y > 1){this.pos_y = 1;}
+            if (this.pos_z > 1){this.pos_z = 1;}
         },
 
         /* set initial angles and coordinates at the very beginning */
@@ -78,25 +84,25 @@ export default {
             this.angle_theta = this.to_radians(this.angle_theta);
             this.angle_phi = this.to_radians(this.angle_phi);
 
-            this.pos_x = this.radius * Math.cos(this.angle_phi) * Math.sin(this.angle_theta);
-            this.pos_y = this.radius * Math.sin(this.angle_phi) * Math.sin(this.angle_theta);
-            this.pos_z = this.radius * Math.cos(this.angle_theta);
+            this.pos_x = Math.cos(this.angle_phi) * Math.sin(this.angle_theta);
+            this.pos_y = Math.sin(this.angle_phi) * Math.sin(this.angle_theta);
+            this.pos_z = Math.cos(this.angle_theta);
         },
 
         get_top(){
-            return this.radius + this.pos_z;
+            return this.radius + this.radius * this.pos_z;
         },
         get_left(){
-            return this.radius + this.pos_y;
+            return this.radius + this.radius * this.pos_y;
         },
 
         get_linear_value(coord, min, max) {
             var b = min + ((max - min)/2);
-            return (coord * ((max - b) / this.radius) + b);
+            return (coord * (max - b) + b);
         },
         get_blur(){
             // Blur_min etant 0, on ne le prend pas en compte
-            var blur = (this.blur_max / 2) * (1 - (this.pos_x / this.radius));
+            var blur = (this.blur_max / 2) * (1 - this.pos_x);
             return ("blur(" + blur + "vw)");
         },
         get_size(){
@@ -118,5 +124,6 @@ export default {
         position: absolute;
         /* filter: blur(0vw); */
         transition: all 0.0s;
+        white-space: nowrap;
     }
 </style>
