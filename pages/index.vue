@@ -7,7 +7,6 @@
             <RightBar class="col-span-2"/>
         </div>
 
-        <SphereTest/>
         <PagePresentation id="about"/>
         <PageEngineering id="engineering"/>
         <ProjectHistory id="history"/>

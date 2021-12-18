@@ -16,7 +16,10 @@ export default {
         index: Number,
         number_items: Number,
         radius: Number,
-        rotation_matrix: Array
+        rotation_matrix: Array,
+        size_min: Number,
+        size_max: Number,
+        padding: Number
     },
     data() {
         return {
@@ -27,8 +30,6 @@ export default {
             angle_theta: 0,
             angle_phi: 0,
             blur_max: 0.1,
-            size_min: 1,
-            size_max: 2,
             opacity_min: 0.5
         };
     },
@@ -90,10 +91,10 @@ export default {
         },
 
         get_top(){
-            return this.radius + this.radius * this.pos_z;
+            return this.padding + this.radius + this.radius * this.pos_z;
         },
         get_left(){
-            return this.radius + this.radius * this.pos_y;
+            return this.padding + this.radius + this.radius * this.pos_y;
         },
 
         get_linear_value(coord, min, max) {

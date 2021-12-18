@@ -1,10 +1,9 @@
 <template>
-    <div class="pl-6 bg-gray_moi min-h-screen">
-        <h1 class="">TEST</h1>
+    <div class="">
         <!-- Le positionnement RELATIVE permet aux objets enfant de se positionner de maniere relative -->
         <!-- <div class="relative w-screen h-screen bg-gray_moi-light" id="sphere"> -->
-        <div class="relative bg-gray_moi-light" id="sphere" @mouseenter="start_roll" @mousemove="update_roll" @mouseleave="end_roll"
-            :style="`width: ${radius*2}vw; height: ${radius*2}vw;`">
+        <div class="relative" id="sphere" @mouseenter="start_roll" @mousemove="update_roll" @mouseleave="end_roll"
+            :style="`width: ${get_area_width()}vw; height: ${get_area_height()}vw;`">
             <SphereItem
                 class="absolute top-0 left-0"
                 v-for='(item, index) in list' :key='index'
@@ -13,6 +12,9 @@
                 :number_items="list.length"
                 :radius="radius"
                 :rotation_matrix="rotation_matrix"
+                :size_min="size_min"
+                :size_max="size_max"
+                :padding="padding"
                  />
         </div>
     </div>
@@ -31,16 +33,23 @@ export default {
         return {
             active: false,
             timer: undefined,
-            interval: 10,  // milliseconds
-            radius: 12,
+            interval: 15,  // milliseconds
+            radius: 10,
             rotation_matrix: undefined,
-            // list: ['10', '20', '30', '40', '50', '60', '70', '80', '90'],
             list: data.sphere_items,
             mouse_x: 0,
             mouse_y: 0,
+            padding: 2,
+
+            // Center coord of the area
             center_x: undefined,
             center_y: undefined,
-            vitesse_max: 1 // degrees
+
+            vitesse_max: 1, // degrees
+
+            // Font size range
+            size_min: 1,
+            size_max: 2
         };
     },
 
@@ -134,6 +143,14 @@ export default {
         get_speed(coord_start, size, mouse){
             // More or less fast depending on how far from the center
             return 2*(this.vitesse_max / size) * (mouse - coord_start - (size/2));
+        },
+
+        get_area_width(){
+
+            return this.radius * 2 + 3.5 * this.size_max + 2 * this.padding;
+        },
+        get_area_height(){
+            return this.radius * 2 + this.size_max + 2 * this.padding;
         }
     },
 
@@ -142,11 +159,6 @@ export default {
 
 
 <style scoped>
-    h1 {
-        @apply text-cyan;
-        font-family: Arial;
-        font-size: 2vw;
-    }
     .sphere_item {
         @apply text-cyan;
         font-family: Arial;
