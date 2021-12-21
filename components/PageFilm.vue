@@ -1,15 +1,14 @@
 <template>
-    <div class="bg-gray_moi min-h-screen">
-        <!-- <div class="px-8 py-10"> -->
-        <div style="padding-left:3vw; padding-top:4vh;">
+    <div class="min-h-screen py-8">
+        <div class="pt-6">
             <h1>
                 MY FILM & MUSIC PORTOFOLIO
             </h1>
-            <p style="padding-top:2vh;">
+            <p class="pt-1">
                 I have spent most of my free time over the past few years expressing my creativity through animated short films and music videos.
                 <br>Below is a list of my most important works.
             </p>
-            <p style="padding-top:2vh;">
+            <p class="pt-1">
                 <em>(Hover for details, click to go to video)</em>
             </p>
 
@@ -55,12 +54,12 @@ export default {
 </script>
 
 <style scoped>
-    h1 {
+    /* h1 {
         @apply text-cyan;
         font-family: Arial;
         font-size: 2.25vw;
         font-weight: bold;
-    }
+    } */
     h2 {
         @apply text-white text-opacity-100 mx-auto w-full;
         font-family: Arial;

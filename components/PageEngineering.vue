@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-gray_moi min-h-screen">
+    <div class="min-h-screen py-8 sm:py-0 pb-8">
 
-        <div class="grid_big" style="padding-top:4vh; padding-left: 5vw;">
+        <div class="grid_big">
 
             <!-- textes -->
             <div class="textbox">
@@ -101,12 +101,12 @@ export default {
 </script>
 
 <style scoped>
-    h1 {
+    /* h1 {
         @apply text-cyan;
         font-family: Arial;
         font-size: 2.5vw;
         font-weight: bold;
-    }
+    } */
     h2 {
         @apply text-white text-opacity-80;
         font-family: Arial;

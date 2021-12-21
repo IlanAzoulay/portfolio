@@ -1,9 +1,10 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
-  <div>
-    <div class="pageBackground relative w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0">
+  <div :class="`grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
+
+    <div class="pageBackground relative" :style="`grid-column-end: ${get_col_end()};`">
       
-      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12">
+      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
       <div class="flex flex-col space-y-0">
         <h1 class="text-center">
@@ -23,28 +24,41 @@
         </div>
       </div>
 
-      <!-- <div class="opacity-50 mx-auto scroll"> -->
       <div class="mx-auto scroll_arrow" @click="scrollto('about')">
-          <div>
+          <h3>
             scroll down
-          </div>
+          </h3>
           <!-- on va repeter la fleche 2 fois, pour le fun -->
-          <div class="flex flex-row space-x-5 justify-center">
-            <div v-for="i in 2" :key="i">
-              <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_arrow_down.png" class="w-6 animate-bounce">
+          <div class="flex flex-row justify-center animate-bounce">
+            <div class="px-2" v-for="i in 2" :key="i">
+              <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_arrow_down.png"
+                class="w-6">
             </div>
           </div>
       </div>
       
-
     </div>
+
+    <div :style="`grid-row-start: 1; grid_column-start: ${size_bigger_grid-1};`" v-if="!mobile">
+      <RightBar/>
+    </div>
+
   </div>
 </template>
 
 <script>
 /* a l'interieur d'ici se trouve du javascript */
+import RightBar from "@/components/RightBar.vue";
 
 export default {
+  components: {
+    RightBar
+  },
+
+  props: {
+    mobile: Boolean,
+    size_bigger_grid: Number  // La RightBar doit faire la meme taille que Navbar pour center MainMenu
+  },
   
   data(){
     /* on definit toutes les variables ici, marche un peu comme un JSON */
@@ -57,8 +71,6 @@ export default {
         max_opacity: 0.5,
         max_scroll: 350
       }
-      // root: document.documentElement
-      // root: document.querySelector(':root')
     };
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
@@ -92,9 +104,6 @@ export default {
       // Appliquer a l'echelle
       new_opacity = this.scroll_arrow.max_opacity * new_opacity
 
-      // Etalonner par 5
-      // new_opacity = new_opacity - (new_opacity % 5);
-
       return new_opacity;
     },
 
@@ -104,6 +113,14 @@ export default {
 
     scrollto(destination){
       document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
+    },
+
+    get_col_end(){
+      if (this.mobile){
+        return this.size_bigger_grid;  // Va faire toute la largeur si on est en mobile
+      } else {
+        return (this.size_bigger_grid - 1);  // Sur PC, laisse la place a RightBar
+      }
     }
   }
 }
@@ -112,24 +129,30 @@ export default {
 
 <style scoped>
   h1 {
-    @apply text-cyan;
+    @apply text-cyan text-4xl py-1;
     font-family: Arial;
     font-weight: bold;
-    font-size: 3vw;
+    /* font-size: 3vw; */
   }
   h2 {
-    @apply  text-cyan;
+    @apply  text-cyan text-xl;
     font-family: Arial;
     font-weight: normal;
     opacity: 0.75;
-    font-size: 1.5vw;
+    /* font-size: 1.5vw; */
+  }
+  h3 {
+    @apply text-white text-sm;
+    font-family: Arial;
+    /* font-size: 1vw; */
   }
   .pageBackground {
-    @apply bg-gray_moi;
+    @apply w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0;
+    grid-column-start: 1;
+    grid-row-start: 1;
   }
 
-  .button_futurist{
-    /* @apply pour faire le tailwind */
+  /* .button_futurist{
     @apply px-14 py-1 text-cyan hover:text-gray_moi;
     @apply cursor-pointer border-cyan border-2 space-y-10;
     font-family: Arial;
@@ -143,16 +166,12 @@ export default {
   }
   .button_futurist:hover {
     background-position: left center;
-    box-shadow: 0 0 0.5vw cyan; /* Glow */
+    box-shadow: 0 0 0.5vw cyan; 
     transition: all .5s ease-out;
-  }
+  } */
 
   .scroll_arrow{
-    @apply cursor-pointer text-white;
-    font-family: Arial;
-    font-size: 1vw;
-    position: absolute;
-    bottom: 2vh;
+    @apply cursor-pointer absolute bottom-2;
     opacity: var(--scroll-arrow-opacity);
   }
 </style>

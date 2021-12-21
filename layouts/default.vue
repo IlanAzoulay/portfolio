@@ -1,48 +1,44 @@
 <template>
-    <div class="grid_all">
-
-        <div class="gauche">
-            <Navbar class="fixedBar"/>
-        </div>
-
-        <!-- Le reste a droite -->
-        <Nuxt class="droite"/>
-        
+    <div class="bg-gray_moi">
+        <Nuxt/>
     </div>
+    
 </template>
 
 
 <script>
 export default {
-    beforeMount() {
-        let root = document.documentElement;
-        root.style.setProperty('--col-number', 6);
-    }
+
 }
 </script>
 
-<style scoped>
-    .grid_all {
-        @apply bg-gray_moi;
-        display: grid;
-        grid-template-columns: repeat(var(--col-number), minmax(0, 1fr));
-        grid-template-rows: repeat(1, minmax(0, 1fr));
+<style>
+    /* Definir ici les classes universelles */
+    h1 {
+        @apply text-cyan text-2xl sm:text-4xl text-center sm:text-left;
+        font-family: Arial;
+        font-weight: bold;
     }
-    .fixedBar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: calc((100/var(--col-number)) * 1%);
+
+    .button_futurist{
+        /* @apply pour faire le tailwind */
+        @apply px-14 py-1.5 text-cyan hover:text-gray_moi;
+        @apply cursor-pointer border-cyan border-2;
+        @apply text-xl;
+        font-family: Arial;
+        font-weight: normal;
+        white-space: nowrap;
+        /* font-size: 1.5vw; */
+        display: block;
+        background: linear-gradient(to right, cyan 50%, transparent 50%);
+        background-position: right center;
+        background-size: 200% 200%;
+        transition: all .5s ease-out;
     }
-    .gauche {
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-    }
-    .droite {
-        grid-column-start: 2;
-        grid-column-end: calc(1 + var(--col-number));
-        grid-row-start: 1;
+    .button_futurist:hover {
+        background-position: left center;
+        box-shadow: 0 0 0.5vw cyan; /* Glow */
+        transition: all .5s ease-out;
     }
 
 </style>

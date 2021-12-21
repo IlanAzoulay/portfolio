@@ -152,6 +152,7 @@ export default {
         get_area_height(){
             return this.radius * 2 + this.size_max + 2 * this.padding;
         }
+        // setTimeOut ? -> to look up
     },
 
 }
