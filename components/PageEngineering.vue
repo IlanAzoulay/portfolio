@@ -1,78 +1,95 @@
 <template>
-    <div class="min-h-screen py-8 sm:py-0 pb-8">
+    <div class="min-h-screen py-8 sm:py-2 pb-8">
 
-        <div class="grid_big">
+        <h1>
+            MY ENGINEERING PORTFOLIO
+        </h1>
 
+        <div class="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 sm:gap-y-1" id="engineering_grid">
             <!-- textes -->
             <div class="textbox">
-                <h1>
-                    MY ENGINEERING PORTFOLIO
-                </h1>
-                <h2 class="pt-4">
-                    Most of my professional experience can be summed up by this one sentence: 
-                    <br><em>"This is what we're trying to do. Ilan, find out how to do it"</em>.<br>
+                <div class="pt-4 pb-2 text-justify">
+                    <h2>Most of my professional experience can be summed up by this one sentence:</h2>
+                    <h2><em>"This is what we're trying to do. Ilan, find how to do it"</em>.</h2>
+                    <h2>
                     With a clear goal in mind, I work relentlessly, autonomously adapt to new technologies, and always reach the desired destination.
-                    <br><br>
+                    </h2>
+                    <br>
+                    <h2>
                     I have created mathematic algorithms to solve financial statements at SAP. Designed a database software for the Ministry of the Armed Forces,
-                    Built from the ground up a program to randomly generate photorealistic CGI to train an AI. 
+                    Built a program to randomly generate photorealistic CGI to train an AI. 
                     Oversaw the entire development of a semi-autonomous robot arm for wheelchairs.
                     Created a 3D simulation to stabilize a satellite. And many more.
+                    </h2>
 
-                    <br><br>
-                    <b class="text-cyan">Main skills:</b><br>
+                    <br>
+
+                    <h2 class="text-center pb-1 sm:text-justify text-lg">
+                        <b class="text-cyan">
+                            Main skills:
+                        </b>
+                    </h2>
+
                     <div class="flex flex-row space-x-6">
                         <!-- Colonne 1 -->
-                        <ul class="font-bold space-y-1">
-                            <li>Programming languages</li>
-                            <li>Embedded systems</li>
-                            <li>3D</li>
-                            <li>Interface development</li>
-                            <li>Communication protocols</li>
-                            <li>Others</li>
+                        <ul class="skills_list">
+                            <li v-for='(skill, index) in skills' :key='index'>
+                                <div class="font-bold">
+                                    {{skill.title}}
+                                </div>
+                                <div v-show="mobile" class="font-normal">
+                                    {{skill.content}}
+                                </div>
+                            </li>
                         </ul>
                         <!-- Colonne 2 -->
-                        <ul class="space-y-0.5">
-                            <li>C, C++, Python, Java, VBA, SQL, HTML/CSS/Javascript</li>
-                            <li>Linux, Arduino, Microcontrollers (PIC), Raspberry Pi, STM32</li>
-                            <li>Blender, Cinema 4D, Solidworks, OpenGL</li>
-                            <li>Nuxt JS, Qt, java Windowbuilder</li>
-                            <li>Wi-fi, Bluetooth/BLE, UART</li>
-                            <li>Git, JSON, bpy</li>
+                        <ul v-show="!mobile" class="skills_list font-normal">
+                            <li v-for='(skill, index) in skills' :key='index'>
+                                {{skill.content}}
+                            </li>
                         </ul>
                     </div>
-
-                </h2>
+                </div>
             </div>
 
             <!-- photos a droite -->
-            <div  class="pics-right">
+            <div v-show="!mobile" class="pics-right">
                 <div class="grid_right">
-                    <div v-for='(pic, index) in pics.right' :key='index' class="picture_superbox">
+                    <div v-for='(pic, index) in pics_data.right' :key='index' class="picture_superbox">
                         <div class="picture_box">
-                            <img v-bind:src="pics.source_pics + pic.filename + '.png'" class="picture">
-                            <h3>
-                                {{pic.description}}
-                                <br><em>{{pic.env}}</em>
-                            </h3>
+                            <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                            <div>
+                                <h3>{{pic.description}}</h3>
+                                <h3><em>{{pic.env}}</em></h3>
+                            </div>
                         </div>
-                        
                     </div>                    
                 </div>
             </div>
 
             <!-- photos en bas -->
-            <div  class="pics-bottom">
+            <div v-show="!mobile" class="pics-bottom">
                 <div class="grid_bottom">
-                    <div v-for='(pic, index) in pics.bottom' :key='index' class="picture_superbox">
+                    <div v-for='(pic, index) in pics_data.bottom' :key='index' class="picture_superbox">
                         <div class="picture_box">
-                            <img v-bind:src="pics.source_pics + pic.filename + '.png'" class="picture">
-                            <h3>
-                                {{pic.description}}
-                                <br><em>{{pic.env}}</em>
-                            </h3>
+                            <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                            <div>
+                                <h3>{{pic.description}}</h3>
+                                <h3><em>{{pic.env}}</em></h3>
+                            </div>
                         </div>
-                        
-                    </div>                    
+                    </div>
+                </div>
+            </div>
+
+            <!-- photos pour mobile -->
+            <div v-show="mobile" class="grid grid-cols-2 gap-y-2 pt-4">
+                <div v-for='(pic, index) in pics_all' :key='index'>
+                    <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                    <div>
+                        <h3>{{pic.description}}</h3>
+                        <h3><em>{{pic.env}}</em></h3>
+                    </div>
                 </div>
             </div>
 
@@ -85,40 +102,59 @@
 import data from '~/static/data/data.json'
 
 export default {
+    props: {
+        mobile: Boolean
+    },
     data() {
         return {
-            pics: data.presentation_pics
+            pics_data: data.presentation_pics,
+            pics_all: [],
+            skills: data.skills,
+            cols_pc: 3,
+            offset_pc: 5
         };
     },
 
-    beforeMount() {
+    mounted() {
         let root = document.documentElement;
-        root.style.setProperty('--box-size', 20);
-        root.style.setProperty('--box-grow', 0.1);
+        root.style.setProperty('--pic-size', this.get_superbox_size());
+        root.style.setProperty('--pic-grow', 0.2);
         root.style.setProperty('--transition-time', 0.5);
+
+        if (this.mobile){
+            this.fill_pics_array();
+        }
+    },
+
+    methods: {
+        get_superbox_size(){
+            var composant = document.getElementById("engineering_grid").getBoundingClientRect();
+            if (!this.mobile){
+                return (this.convert_px_to_vw(composant.width) / this.cols_pc) - this.offset_pc;
+            } else {
+                return this.convert_px_to_vw(composant.width);
+            }
+        },
+        convert_px_to_vw(px) {
+            return px * (100 / document.documentElement.clientWidth);
+        },
+        fill_pics_array(){
+            for (let index = 0; index < this.pics_data.right.length; ++index){
+                this.pics_all.push(this.pics_data.right[index]);
+            }
+            for (let index = 0; index < this.pics_data.bottom.length; ++index){
+                this.pics_all.push(this.pics_data.bottom[index]);
+            }
+        }
     }
 }
 </script>
 
 <style scoped>
-    /* h1 {
-        @apply text-cyan;
-        font-family: Arial;
-        font-size: 2.5vw;
-        font-weight: bold;
-    } */
     h2 {
-        @apply text-white text-opacity-80;
+        @apply text-white text-opacity-80 text-base;
         font-family: Arial;
-        font-size: 1vw;
-        text-align: justify;
-    }
-    .grid_big {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-template-rows: repeat(3, minmax(0, 1fr));
-        column-gap: 0px;
-        row-gap: 2vh;
+        /* text-align: justify; */
     }
     .textbox {
         grid-column-start: 1;
@@ -133,20 +169,18 @@ export default {
         grid-row-end: 3;
     }
     .grid_right {
-        @apply content-center;
+        @apply content-center gap-y-2;
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
         grid-template-rows: repeat(2, minmax(0, 1fr));
-        row-gap: 2vh;
         height: 100%;
         width: 100%;
     }
     .grid_bottom {
-        @apply content-center;
+        @apply content-center gap-x-2;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         grid-template-rows: repeat(1, minmax(0, 1fr));
-        column-gap: 2vw;
         height: 100%;
         width: 100%;
     }
@@ -157,37 +191,37 @@ export default {
         grid-row-end: 4;
     }
     .picture_superbox{
-        width: calc(var(--box-size) * 1vw);
-        height: calc(var(--box-size) * 1vh);
-        margin: 0 0;
+        @apply top-0 mx-auto;
+        width: calc(var(--pic-size) * 1vw);
+        height: calc(var(--pic-size) * 1vh);
     }
     .picture_box{
-        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
-        height: calc(var(--box-size) * (1 - var(--box-grow)) * 1vh);
-        position: relative;
-        top: calc(var(--box-size) * (var(--box-grow)/2) * 1vh);
-        left: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        @apply mx-auto relative top-0;
+        width: calc((1 - var(--pic-grow)) * 100%);
+        height: calc((1 - var(--pic-grow)) * 100%);
         transition: all calc(var(--transition-time) * 1s);
     }
     .picture_box:hover {
-        top: 0;
-        left: 0;
-        width: calc(var(--box-size) * 1vw);
-        height: calc(var(--box-size) * 1vh);
+        @apply mx-auto top-0;
+        width: 100%;
+        height: 100%;
     }
     .picture {
         @apply mx-auto my-auto;
-        /* width: 90%; */
         transition: all 0.5s;
     }
     h3 {
-        @apply text-white text-opacity-75 text-center px-0;
+        @apply text-white text-opacity-75 text-center text-sm px-0;
         font-family: Arial;
-        font-size: 0.85vw;
         transition: all calc(var(--transition-time) * 1s);
     }
     .picture_box:hover h3 {
-        padding-left: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
-        padding-right: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        padding-left: calc(var(--pic-size) * (var(--pic-grow)/2) * 1vw);
+        padding-right: calc(var(--pic-size) * (var(--pic-grow)/2) * 1vw);
+    }
+    .skills_list {
+        @apply text-white text-opacity-80 text-base;
+        @apply space-y-1 text-center sm:text-left;
+        font-family: Arial;
     }
 </style>

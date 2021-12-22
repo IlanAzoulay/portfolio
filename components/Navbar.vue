@@ -11,18 +11,11 @@
         </div >
 
         <!-- CONTENT -->
-        <!-- <transition name="slide"> -->
-        <!-- <div v-if="opened || !mobile"> -->
-
-            <!-- <div class="relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen"
-                :style="`left: ${get_pos()}; top: 0; transition-property: left; transition-duration: 1s; transition-delay: 1s;`"> -->
-
         <div class="relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen"
             style="transition: left .5s ease-out;" :style="(opened || !mobile) ? 'left: 0;' : 'left: 100vw;'">
 
-
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_A.png" name='A'
-                    class="mx-auto w-36 cursor-pointer pt-10 sm:pt-4" @click="scrollto('home')">
+                    class="mx-auto w-36 cursor-pointer pt-10 sm:pt-4" @click="scrollto('home'); opened = !opened">
 
             <div class="space-y-0 w-full">
                 <div v-for='(button, index) in buttonsTab' :key='index'>
@@ -52,6 +45,8 @@
 </template>
 
 <script>
+import data from '~/static/data/data.json'
+
 export default {
     props: {
         mobile: Boolean
@@ -59,14 +54,17 @@ export default {
     data() {
         return {
             opened: false,
-            buttonsTab: [
-                {title: 'About', href: 'about'},
-                {title: 'Engineering', href: 'engineering'},
-                {title: 'Project History', href: 'history'},
-                {title: 'Filmography', href: 'film'},
-                {title: 'Contact', href: 'contact'}
-            ]
+            buttonsTab: data.navbar_buttons
         };
+    },
+
+    mounted(){
+        this.mobile = this.isMobile;
+    },
+    computed: {
+        isMobile () {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
     },
 
     methods:{
@@ -98,7 +96,8 @@ export default {
         transition: all .5s ease-out;
     }
     .button_normal:hover{
-        text-shadow: 0 0 0.25vw white;
+        @apply text-cyan;
+        text-shadow: 0 0 0.2vw cyan;
     }
 
     .logo {

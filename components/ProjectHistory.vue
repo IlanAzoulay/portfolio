@@ -1,27 +1,30 @@
 <template>
-    <div class="min-h-screen py-8">
-        <h1 class="pb-2 pt-6">
+    <div class="min-h-screen pb-8">
+        <h1 class="pb-2">
             MY PROJECT HISTORY
         </h1>
         <p>
             Below is a list of the most important personal, academic, and professional engineering projects I have worked on
-            <br><em>(hover for details)</em>
         </p>
-        <div class="grid-logos">
+        <p>
+            <em>(hover for details)</em>
+        </p>
+        <div class="grid-logos" id="project_grid">
             <div v-for='(logo, index) in projets.list_logos' :key='index'>
 
                 <div class="logo_superbox">
+                <!-- <div class="ml-0 mr-auto my-auto" :style="`${get_superbox_style()}`"> -->
 
                     <div class="logo_box">
 
                         <img v-bind:src="projets.source_logos + logo.filename + '.png'" class="logo">
-                        <h2 class="project_details">
-                            <b>{{logo.title}}</b>
-                            <br><em>({{logo.year}})</em>
+                        <div class="project_details">
+                            <h2><b>{{logo.title}}</b></h2>
+                            <h2><em>({{logo.year}})</em></h2>
                             <h3>- {{logo.post}} -</h3>
                             <h3>{{logo.description}}</h3>
                             <h3><em>({{logo.environment}})</em></h3>
-                        </h2>
+                        </div>
                     </div>
                 </div>
 
@@ -35,9 +38,7 @@ import data from '~/static/data/data.json'
 
 export default {
     props: {
-        mobile: Boolean,
-        pad: Number,
-        size_bigger_grid: Number
+        mobile: Boolean
     },
     data() {
         return {
@@ -45,27 +46,40 @@ export default {
             selected: undefined,
             cols_pc: 4,
             box_grow: 0.1,
-            superbox_size: undefined,
             box_size: undefined
         };
     },
 
-    beforeMount() {
-        let root = document.documentElement;
+    // beforeCreate(){
+    //     console.log("BEFORE CREATE");
+    // },
+    // created(){
+    //     console.log("CREATED");
+    // },
+    // beforeMount(){
+    // },
 
-        // root.style.setProperty('--box-size', this.get_superbox_size());
-        root.style.setProperty('--box-size', 100);
+    mounted() {
+        let root = document.documentElement;
+        root.style.setProperty('--box-size', this.get_superbox_size());
         root.style.setProperty('--box-grow', this.box_grow);
         root.style.setProperty('--transition-time', 0.5);
     },
 
     methods:{
         get_superbox_size(){
+            var composant = document.getElementById("project_grid").getBoundingClientRect();
             if (!this.mobile){
-                return (100 * ((this.size_bigger_grid-1)/this.size_bigger_grid) - (2*this.pad)) / this.cols_pc;
+                return this.convert_px_to_vw(composant.width) / this.cols_pc;
             } else {
-                return 100-(2*this.pad);
+                return this.convert_px_to_vw(composant.width);
             }
+        },
+        convert_px_to_vw(px) {
+            return px * (100 / document.documentElement.clientWidth);
+        },
+        get_superbox_style(){
+            return ("width: " + this.box_size + "vw; height: " + this.box_size + "vw;");
         }
     }
 }
@@ -75,23 +89,23 @@ export default {
     p {
         @apply text-white text-opacity-80 text-base text-center sm:text-left;
         font-family: Arial;
-        /* font-size: 1.25vw; */
     }
     .grid-logos {
-        @apply flex flex-col sm:grid grid-cols-4 grid-rows-2 py-3 w-full gap-0 sm:gap-4;
+        @apply flex flex-col w-full py-3 gap-y-0 sm:gap-0;
+        @apply sm:grid sm:grid-cols-4 sm:grid-rows-2
     }
 
     .logo_superbox {
-        @apply mx-auto;
-        width: calc(var(--box-size) * 1rem);
-        height: calc(var(--box-size) * 1rem);
+        @apply mx-auto sm:ml-0 sm:mr-auto my-auto;
+        width: calc(var(--box-size) * 1vw);
+        height: calc(var(--box-size) * 1vw);
     }
     .logo_box {
         @apply bg-gray_moi-light m-auto;
         @apply text-opacity-0 text-white;
         box-shadow: 0 0 0.25rem white;
-        width: 90%;
-        height: 90%;
+        width: calc((1 - var(--box-grow)) * 100%);
+        height: calc((1 - var(--box-grow)) * 100%);
         position: relative;
         top: calc(var(--box-grow) * 50%);
         transition: all calc(var(--transition-time) * 1s);
@@ -119,8 +133,7 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: Arial;
-        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1rem);
-        /* width: 90%; */
+        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
         transition: all calc(var(--transition-time) * 1s);
     }
     .logo_box:hover .project_details {

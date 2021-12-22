@@ -1,12 +1,14 @@
 <template>
-    <div class="min-h-screen py-8">
-        <div class="pt-6">
+    <div class="min-h-screen pb-8">
+        <div>
             <h1>
-                MY FILM & MUSIC PORTOFOLIO
+                MY FILM &amp; MUSIC PORTOFOLIO
             </h1>
             <p class="pt-1">
                 I have spent most of my free time over the past few years expressing my creativity through animated short films and music videos.
-                <br>Below is a list of my most important works.
+            </p>
+            <p>
+                Below is a list of my most important works.
             </p>
             <p class="pt-1">
                 <em>(Hover for details, click to go to video)</em>
@@ -14,19 +16,36 @@
 
             <div class="grid-thumbnails">
                 <div v-for='(mini, index) in thumbnails.miniatures' :key='index'>
-                    <div class="superbox">
+
+                    <div v-if="!mobile" class="superbox">
                         <div class="box">
                             <a :href="`${mini.link}`" target="_blank" rel="noopener noreferrer">
                                 <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail">
-                                <h2>{{mini.title}} <em class="opacity-80"><br>({{mini.year}})</em></h2>
+                                <h2>{{mini.title}}</h2>
+                                <h2><em class="opacity-80">({{mini.year}})</em></h2>
                                 <div class="video_details">
                                     {{mini.description}}
                                 </div>
                             </a>
                         </div>
                     </div>
+
+                    <div v-else class="w-full grid grid-cols-3 pt-2 gap-x-2 items-center">
+                        <a :href="`${mini.link}`" target="_blank" rel="noopener noreferrer" class="col-span-1">
+                            <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail ml-0 my-auto"
+                                style="box-shadow: 0 0 1vw white;">
+                        </a>
+                        <div class="col-span-2">
+                            <h3><b>{{mini.title}}</b></h3>
+                            <h3><em class="opacity-80">({{mini.year}})</em></h3>
+                            <h3 class="opacity-80">{{mini.description}}</h3>
+                        </div>  
+                        
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>    
 </template>
@@ -35,69 +54,80 @@
 import data from '~/static/data/data.json'
 
 export default {
+    props: {
+        mobile: Boolean
+    },
     data() {
         return {
-            thumbnails: data.filmography
+            thumbnails: data.filmography,
+            cols_pc: 4,
+            pic_size_mobile: undefined
         };
     },
 
-    beforeMount() {
+    mounted() {
         let root = document.documentElement;
-        root.style.setProperty('--box-size', 18);
-        root.style.setProperty('--box-grow', 0.1);
+        root.style.setProperty('--thumbnail-size', this.get_superbox_size());
+        root.style.setProperty('--thumbnail-grow', 0.1);
         root.style.setProperty('--transition-time', 0.5);
     },
 
     methods: {
+        get_superbox_size(){
+            var composant = document.getElementById("project_grid").getBoundingClientRect();
+            if (!this.mobile){
+                return this.convert_px_to_vw(composant.width) / this.cols_pc;
+            } else {
+                this.pic_size_mobile = this.convert_px_to_vw(composant.width) / 3
+                return this.pic_size_mobile;
+            }
+        },
+        convert_px_to_vw(px) {
+            return px * (100 / document.documentElement.clientWidth);
+        }
     }
 }
 </script>
 
 <style scoped>
-    /* h1 {
-        @apply text-cyan;
-        font-family: Arial;
-        font-size: 2.25vw;
-        font-weight: bold;
-    } */
     h2 {
-        @apply text-white text-opacity-100 mx-auto w-full;
+        @apply text-white text-opacity-100 text-base mx-auto w-full;
         font-family: Arial;
-        font-size: 1vw;
         text-align: center;
-        padding-top: 1.25vh;
     }
     p{
-        @apply text-white text-opacity-80;
+        @apply text-white text-opacity-80 text-base;
         font-family: Arial;
-        font-size: 1.15vw;
+    }
+    h3 {
+        @apply text-white text-left text-sm;
+        font-family: Arial; 
     }
     .grid-thumbnails {
-        @apply w-full h-full;
-        @apply grid grid-cols-4 grid-rows-2;
-        padding-top: 2vh;
-        padding-right: 6vw;
-        row-gap: 10vh;
+        @apply w-full h-full pt-2;
+        @apply flex flex-col gap-y-4;
+        @apply sm:grid sm:grid-cols-4 sm:grid-rows-2 sm:pr-4 sm:gap-y-16;
     }
     .superbox {
-        width: calc(var(--box-size) * 1vw);
-        height: calc((720/1280) * (var(--box-size)) * 1vw);
+        @apply mx-auto my-auto;
+        width: calc(var(--thumbnail-size) * 1vw);
+        height: calc((720/1280) * (var(--thumbnail-size)) * 1vw);
     }
     .box {
+        @apply mx-auto;
         @apply bg-gray_moi-light m-auto;
         @apply text-opacity-0 text-white;
         box-shadow: 0 0 0.25vw white;
-        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
-        height: calc((720/1280) * (var(--box-size)) * (1 - var(--box-grow)) * 1vw);
+        width: calc((1 - var(--thumbnail-grow)) * 100%);
+        height: calc((1 - var(--thumbnail-grow)) * 100%);
         position: relative;
-        top: calc(var(--box-size) * (var(--box-grow)/2) * 1vw);
+        top: calc(var(--thumbnail-grow) * 50%);
         transition: all calc(var(--transition-time) * 1s);
     }
     .box:hover {
-        @apply text-opacity-100;
-        top: 0vw;
-        width: calc(var(--box-size) * 1vw);
-        height: calc((720/1280) * (var(--box-size)) * 1vw);
+        @apply text-opacity-100 top-0;
+        width: 100%;
+        height: 100%;
         box-shadow: 0 0 1vw cyan;
     }
     .thumbnail {
@@ -109,15 +139,15 @@ export default {
         @apply opacity-5;
     }
     .video_details {
-        @apply text-white text-center;
+        @apply text-white text-center text-base;
         @apply opacity-0;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: Arial;
-        font-size: 1vw;
-        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
+        /* font-size: 1vw; */
+        width: calc(var(--thumbnail-size) * (1 - var(--thumbnail-grow)) * 1vw);
         transition: all calc(var(--transition-time) * 1s);
     }
     .box:hover .video_details {

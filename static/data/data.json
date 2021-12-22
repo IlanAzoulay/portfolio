@@ -7,7 +7,7 @@
 			"title": "The Chinese Censorship Song",
             "year": "2020",
             "link": "https://youtu.be/CdVFIFnDcrU",
-            "description": "My most popular song by far. A music parody to denounce Western compliance to Chinese censorship"
+            "description": "My most popular song. A music parody to denounce Western compliance to Chinese censorship"
             },
             {
             "filename": "Emu",
@@ -167,5 +167,53 @@
         "Database",
         "3D Design",
         "Electronics"
+    ],
+    "skills": [
+        {
+            "title": "Programming languages",
+            "content": "C, C++, Python, Java, VBA, SQL, HTML/CSS/Javascript"
+        },
+        {
+            "title": "Embedded systems",
+            "content": "Linux, Arduino, Microcontrollers (PIC), STM32"
+        },
+        {
+            "title": "3D",
+            "content": "Blender, Cinema 4D, Solidworks, OpenGL"
+        },
+        {
+            "title": "Interface developmen",
+            "content": "Nuxt JS, Qt, java Windowbuilder"
+        },
+        {
+            "title": "Communication protocols",
+            "content": "Wi-fi, Bluetooth/BLE, UART"
+        },
+        {
+            "title": "Others",
+            "content": "Git, JSON, bpy"
+        }
+    ],
+    "navbar_buttons": [
+        {
+            "title": "About",
+            "href": "about"
+        },
+        {
+            "title": "Engineering",
+            "href": "engineering"
+        },
+        {
+            "title": "Project History",
+            "href": "history"
+        },
+        {
+            "title": "Filmography",
+            "href": "film"
+        },
+        {
+            "title": "Contact",
+            "href": "contact"
+        }
     ]
 }

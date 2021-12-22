@@ -1,8 +1,9 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
-  <div :class="`grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
+  <div :class="`w-full grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
 
-    <div class="pageBackground relative" :style="`grid-column-end: ${get_col_end()};`">
+    <!-- <div class="pageBackground relative" :style="`grid-column-end: ${col_end};`"> -->
+    <div class="pageBackground">
       
       <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
@@ -39,7 +40,7 @@
       
     </div>
 
-    <div :style="`grid-row-start: 1; grid_column-start: ${size_bigger_grid-1};`" v-if="!mobile">
+    <div v-show="!mobile" :style="`grid-row-start: 1; grid_column-start: ${size_bigger_grid-1};`">
       <RightBar/>
     </div>
 
@@ -67,6 +68,7 @@ export default {
       name: 'Ilan',  /* utiliser des single quotes */
       blue_futurist: '#00FFEA',
       scroll_var: 0,
+      col_end: undefined,
       scroll_arrow: {
         max_opacity: 0.5,
         max_scroll: 350
@@ -75,14 +77,19 @@ export default {
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
 
-  // mounted() {
   beforeMount() {
     window.addEventListener("scroll", this.onScroll);
     let root = document.documentElement;
+    root.style.setProperty('--col-end', this.get_col_end());
+    root.style.setProperty('--scroll-arrow-opacity', this.opacity_updated());
+  },
+  mounted() {
+    let root = document.documentElement;
+    root.style.setProperty('--col-end', this.get_col_end());
     root.style.setProperty('--scroll-arrow-opacity', this.opacity_updated());
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll)
+    window.removeEventListener("scroll", this.onScroll);
   },
 
   methods:{  /* Definir les fonctions */
@@ -132,43 +139,23 @@ export default {
     @apply text-cyan text-4xl py-1;
     font-family: Arial;
     font-weight: bold;
-    /* font-size: 3vw; */
   }
   h2 {
     @apply  text-cyan text-xl;
     font-family: Arial;
     font-weight: normal;
     opacity: 0.75;
-    /* font-size: 1.5vw; */
   }
   h3 {
     @apply text-white text-sm;
     font-family: Arial;
-    /* font-size: 1vw; */
   }
   .pageBackground {
-    @apply w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0;
+    @apply relative w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0;
     grid-column-start: 1;
     grid-row-start: 1;
+    grid-column-end: var(--col-end);
   }
-
-  /* .button_futurist{
-    @apply px-14 py-1 text-cyan hover:text-gray_moi;
-    @apply cursor-pointer border-cyan border-2 space-y-10;
-    font-family: Arial;
-    font-weight: normal;
-    font-size: 1.5vw;
-    display: block;
-    background: linear-gradient(to right, cyan 50%, transparent 50%);
-    background-position: right center;
-    background-size: 200% 200%;
-    transition: all .5s ease-out;
-  }
-  .button_futurist:hover {
-    background-position: left center;
-    box-shadow: 0 0 0.5vw cyan; 
-    transition: all .5s ease-out;
-  } */
 
   .scroll_arrow{
     @apply cursor-pointer absolute bottom-2;

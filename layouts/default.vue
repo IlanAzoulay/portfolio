@@ -15,7 +15,7 @@ export default {
 <style>
     /* Definir ici les classes universelles */
     h1 {
-        @apply text-cyan text-2xl sm:text-4xl text-center sm:text-left;
+        @apply text-cyan text-2xl sm:text-4xl text-center sm:text-left pt-6;
         font-family: Arial;
         font-weight: bold;
     }

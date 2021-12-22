@@ -1,48 +1,26 @@
 <template>
     <div class="min-w-full min-h-full">
 
-        <!-- <div class="grid_all">
-            <div class="fixed sm:gauche sm:fixedBar">
-                <Navbar :mobile="mobile"/>
-            </div>
-
-            <div class="droite" :style="`grid-column-start: ${get_col_start()}`">
-
-                <MainMenu id="home" 
-                    :mobile="mobile" 
-                    :size_bigger_grid="size_grid"
-                />
-
-                <PagePresentation id="about"/>
-                <PageEngineering id="engineering"/>
-                <ProjectHistory id="history"/>
-                <PageFilm id="film"/>
-                <PageContact id="contact"/>
-            </div>
-        </div> -->
-
         <div class="grid_all">
 
-            <div :class="`fixed z-10 w-full top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:w-1/${size_grid}`">
+            <div class="fixed z-10 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1"
+                :style="`${get_nav_style()}`">
                 <Navbar :mobile="mobile"/>
             </div>
 
-            <!-- <Navbar class="w-full sm:fixedBar sm:gauche sm:col-span-1 sm:row-start-1"
-                :mobile="mobile"/> -->
-
-            <div :class="`relative z-0 sm:col-start-2 sm:col-end-${size_grid+1} sm:row-start-1`">
+            <div class="relative z-0 sm:col-start-2 sm:row-start-1" :style="`${get_main_style()}`">
                 <MainMenu id="home" 
                     :mobile="mobile" 
                     :size_bigger_grid="size_grid"
                 />
-                <div :class="`px-${padding_universal} w-full`">
+                <div class="w-full" :style="`padding: 0 ${padding_universal}rem;`" >
                     <PagePresentation id="about"/>
-                    <PageEngineering id="engineering"/>
+                    <PageEngineering id="engineering"
+                        :mobile="mobile"/>
                     <ProjectHistory id="history"
-                        :mobile="mobile"
-                        :pad="padding_universal"
-                        :size_bigger_grid="size_grid" />
-                    <PageFilm id="film"/>
+                        :mobile="mobile" />
+                    <PageFilm id="film"
+                        :mobile="mobile"/>
                     <PageContact id="contact"/>
                 </div>
                 
@@ -60,20 +38,21 @@ export default {
         return {
             mobile: false,
             size_grid: 6,
-            padding_universal: 14
+            padding_universal: 3.5
         }
     },
 
     beforeMount() {
         let root = document.documentElement;
         root.style.setProperty('--col-number', this.size_grid);
-    },
-    mounted() {
+
         this.mobile = this.isMobile;
         if (this.mobile){
-            this.padding_universal = 8;
+            this.padding_universal = 2;
         }
     },
+    // mounted() {
+    // },
 
     computed: {
         isMobile () {
@@ -87,6 +66,22 @@ export default {
                 return 1;
             } else {
                 return 2;
+            }
+        },
+        get_nav_style(){
+            if (!this.mobile){
+                var pourcentage = 100/this.size_grid;
+                return ("grid-column-end: 2; width: " + pourcentage + "%;");
+            } else {
+                return "width: 100%";
+            }
+        },
+        get_main_style(){
+            if (!this.mobile){
+                // var pourcentage = 100 * ((this.size_grid - 1)/this.size_grid);
+                return ("grid-column-start: 2; grid-column-end: " + (this.size_grid+1) + "; grid-row-start: 1; width: 100%;");
+            } else {
+                return "width: 100%";
             }
         }
     }
