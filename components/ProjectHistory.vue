@@ -12,19 +12,20 @@
         <div class="grid-logos" id="project_grid">
             <div v-for='(logo, index) in projets.list_logos' :key='index'>
 
-                <div class="logo_superbox">
-                <!-- <div class="ml-0 mr-auto my-auto" :style="`${get_superbox_style()}`"> -->
+                <div class="logo_superbox" >
 
-                    <div class="logo_box">
+                    <div :class="selected === index ? 'logo_box_selected' : 'logo_box'" @click="select_project(index)">
 
-                        <img v-bind:src="projets.source_logos + logo.filename + '.png'" class="logo">
-                        <div class="project_details">
+                        <img v-bind:src="projets.source_logos + logo.filename + '.png'"
+                            :class="selected === index ? 'logo_selected' : 'logo'">
+                        <div :class="selected === index ? 'project_details_selected' : 'project_details'">
                             <h2><b>{{logo.title}}</b></h2>
                             <h2><em>({{logo.year}})</em></h2>
                             <h3>- {{logo.post}} -</h3>
                             <h3>{{logo.description}}</h3>
                             <h3><em>({{logo.environment}})</em></h3>
                         </div>
+
                     </div>
                 </div>
 
@@ -42,6 +43,7 @@ export default {
     },
     data() {
         return {
+            index: undefined,
             projets: data.projets,
             selected: undefined,
             cols_pc: 4,
@@ -49,15 +51,6 @@ export default {
             box_size: undefined
         };
     },
-
-    // beforeCreate(){
-    //     console.log("BEFORE CREATE");
-    // },
-    // created(){
-    //     console.log("CREATED");
-    // },
-    // beforeMount(){
-    // },
 
     mounted() {
         let root = document.documentElement;
@@ -78,8 +71,15 @@ export default {
         convert_px_to_vw(px) {
             return px * (100 / document.documentElement.clientWidth);
         },
-        get_superbox_style(){
-            return ("width: " + this.box_size + "vw; height: " + this.box_size + "vw;");
+        select_project: function(index){
+            // TOGGLE SELECTION
+            if (this.mobile){
+                if (this.selected === index){
+                    this.selected = undefined;
+                } else {
+                    this.selected = index;
+                }
+            }
         }
     }
 }
@@ -141,6 +141,32 @@ export default {
     }
     h3 {
         @apply pt-1;
+    }
+
+
+    .logo_box_selected {
+        @apply bg-gray_moi-light m-auto;
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 0.75rem cyan;
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .project_details_selected {
+        @apply text-white text-center text-base;
+        @apply opacity-100;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial;
+        width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
+        transition: all calc(var(--transition-time) * 1s);
+    }
+    .logo_selected {
+        @apply m-auto opacity-5 p-2;
+        transition: all calc(var(--transition-time) * 1s);
     }
     
 </style>

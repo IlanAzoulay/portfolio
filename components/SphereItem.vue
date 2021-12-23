@@ -1,7 +1,7 @@
 <template>
     <div class="absolute top-0 left-0 w-full h-full">
-        <h1 :style="`top: ${get_top()}vw; left: ${get_left()}vw; filter: ${get_blur()}; font-size: ${get_size()}vw;
-        opacity: ${get_opacity()}`" >
+        <h1 :style="`top: ${get_top()}rem; left: ${get_left()}rem; filter: ${get_blur()}; font-size: ${get_size()}rem;
+        opacity: ${get_opacity()}; color: ${text_color}`" >
             {{text}}
         </h1>
     </div>
@@ -12,24 +12,28 @@
 <script>
 export default {
     props: {
-        text: String,
-        index: Number,
-        number_items: Number,
-        radius: Number,
+        text: {type: String, required: true},
+        index: {type: Number, required: true},
+        number_items: {type: Number, required: true},
+        radius: {type: Number, required: true},
         rotation_matrix: Array,
-        size_min: Number,
-        size_max: Number,
-        padding: Number
+        text_color: {type: String, required: true},
+        font_size_min: Number,
+        font_size_max: {type: Number, required: true},
+        blur_max: {type: Number, required: true},
+        padding: Number,
     },
     data() {
         return {
-            /* positions x, y, et z entre -1 et 1. Seront multiplies par Rayon ensuite */
+            // positions x, y, and z between -1 et 1. Will be multiplied by radius afterwards
+            // IMPORTANT NOTE: spheric (x, y, z) is (y, z, x) in screen coordinates
             pos_x: 0,
             pos_y: 0,
             pos_z: 0,
+            // Spheric coordinates for initial placement
             angle_theta: 0,
             angle_phi: 0,
-            blur_max: 0.1,
+
             opacity_min: 0.5
         };
     },
@@ -40,10 +44,6 @@ export default {
 
     // Activates when prop changes
     watch: {
-        // "input_phi": function(val, oldVal) {
-        //     this.update_phi();
-        //     this.update_pos();
-        // }
         "rotation_matrix": function() {
             this.rotate_pos();
         }
@@ -67,7 +67,7 @@ export default {
             this.pos_y = this.rotation_matrix[1][0] * x + this.rotation_matrix[1][1] * y + this.rotation_matrix[1][2] * z;
             this.pos_z = this.rotation_matrix[2][0] * x + this.rotation_matrix[2][1] * y + this.rotation_matrix[2][2] * z;
 
-            // TODO: verifier que ca depasse pas 1
+            // Safety, make sure no coordinate ever goes beyond 1
             if (this.pos_x > 1){this.pos_x = 1;}
             if (this.pos_y > 1){this.pos_y = 1;}
             if (this.pos_z > 1){this.pos_z = 1;}
@@ -102,12 +102,11 @@ export default {
             return (coord * (max - b) + b);
         },
         get_blur(){
-            // Blur_min etant 0, on ne le prend pas en compte
             var blur = (this.blur_max / 2) * (1 - this.pos_x);
-            return ("blur(" + blur + "vw)");
+            return ("blur(" + blur + "rem)");
         },
         get_size(){
-            return this.get_linear_value(this.pos_x, this.size_min, this.size_max);
+            return this.get_linear_value(this.pos_x, this.font_size_min, this.font_size_max);
         },
         get_opacity(){
             return this.get_linear_value(this.pos_x, this.opacity_min, 1);
@@ -119,11 +118,9 @@ export default {
 
 <style scoped>
     h1 {
-        @apply text-cyan text-center;
+        @apply text-center;
         font-family: Arial;
-        /* font-size: 2vw; */
         position: absolute;
-        /* filter: blur(0vw); */
         transition: all 0.0s;
         white-space: nowrap;
     }

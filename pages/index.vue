@@ -14,7 +14,8 @@
                     :size_bigger_grid="size_grid"
                 />
                 <div class="w-full" :style="`padding: 0 ${padding_universal}rem;`" >
-                    <PagePresentation id="about"/>
+                    <PagePresentation id="about" 
+                        :mobile="mobile" />
                     <PageEngineering id="engineering"
                         :mobile="mobile"/>
                     <ProjectHistory id="history"

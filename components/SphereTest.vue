@@ -1,21 +1,21 @@
 <template>
-    <div class="">
-        <!-- Le positionnement RELATIVE permet aux objets enfant de se positionner de maniere relative -->
-        <!-- <div class="relative w-screen h-screen bg-gray_moi-light" id="sphere"> -->
+    <div class="static">
         <div class="relative" id="sphere" @mouseenter="start_roll" @mousemove="update_roll" @mouseleave="end_roll"
-            :style="`width: ${get_area_width()}vw; height: ${get_area_height()}vw;`">
+            :style="`width: ${get_area_width()}rem; height: ${get_area_height()}rem;`">
             <SphereItem
                 class="absolute top-0 left-0"
-                v-for='(item, index) in list' :key='index'
+                v-for='(item, index) in items_list' :key='index'
                 :text="item"
                 :index="index"
-                :number_items="list.length"
+                :number_items="items_list.length"
                 :radius="radius"
                 :rotation_matrix="rotation_matrix"
-                :size_min="size_min"
-                :size_max="size_max"
+                :text_color="text_color"
+                :font_size_min="font_size_min"
+                :font_size_max="font_size_max"
+                :blur_max="blur_max"
                 :padding="padding"
-                 />
+            />
         </div>
     </div>
 </template>
@@ -23,9 +23,35 @@
 
 <script>
 import SphereItem from "@/components/SphereItem.vue";
-import data from '~/static/data/data.json'
+// import data from '~/static/data/data.json'
 
 export default {
+    props: {
+        items_list: {
+            type: Array,
+            required: true
+        },
+        radius: {
+            type: Number,
+            default: 12
+        },
+        text_color: {
+            type: String,
+            default: '#00FFEA'
+        },
+        font_size_max: {
+            type: Number,
+            default: 2
+        },
+        blur_max: {
+            type: Number,
+            default: 0.1
+        },
+        update_interval: {
+            type: Number,
+            default: 15 // milliseconds
+        }
+    },
     components: {
         SphereItem
     },
@@ -33,28 +59,29 @@ export default {
         return {
             active: false,
             timer: undefined,
-            interval: 15,  // milliseconds
-            radius: 10,
             rotation_matrix: undefined,
-            list: data.sphere_items,
+
+            // Input coords
             mouse_x: 0,
             mouse_y: 0,
-            padding: 2,
+
+            padding: undefined,
+            font_size_min: undefined,
 
             // Center coord of the area
             center_x: undefined,
             center_y: undefined,
 
-            vitesse_max: 1, // degrees
-
-            // Font size range
-            size_min: 1,
-            size_max: 2
+            speed_max: 1, // degrees (avoid touching this, it's better to change the interval for speed)
         };
     },
 
     beforeMount(){
         this.rotation_matrix = this.get_euler_matrix(0, 0, 0);  // Initialize Euler matrix
+        this.padding = this.radius / 5;
+        this.font_size_min = this.font_size_max / 2;
+    },
+    mounted(){
     },
 
     methods:{
@@ -111,10 +138,10 @@ export default {
             this.center_x = composant.left + composant.width / 2;
             this.center_y = composant.top + composant.height / 2;
 
-            var ref = this;  // IMPORTANT pour eviter un mismatch de "this"
+            var ref = this;  // IMPORTANT to avoid mismatch with "this"
             this.timer = setInterval( function() { 
                 ref.sphere_roll(composant.left, composant.top, composant.width, composant.height);
-            }, this.interval);
+            }, this.update_interval);
         },
         end_roll(){
             this.active = false;
@@ -127,11 +154,10 @@ export default {
             }
         },
         sphere_roll(left, top, width, height){
-            // Directions des AXES: Z vers le haut - Y vers la droite - X vers nous
-            // Rotations: Autour de Z pour gauche-droite - Autour de Y pour haut-bas
+            // AXIS DIRECTIONS: Z: up - Y: right - X towards user
+            // Rotations: around Z: left-right - around Y: up-down
 
-            var move = this.get_sphere_movement(left, top, width, height)
-
+            var move = this.get_sphere_movement(left, top, width, height);
             this.rotation_matrix = this.get_euler_matrix(0, move[1], move[0]);
         },
         get_sphere_movement(left, top, width, height){
@@ -142,15 +168,14 @@ export default {
         },
         get_speed(coord_start, size, mouse){
             // More or less fast depending on how far from the center
-            return 2*(this.vitesse_max / size) * (mouse - coord_start - (size/2));
+            return 2*(this.speed_max / size) * (mouse - coord_start - (size/2));
         },
 
         get_area_width(){
-
-            return this.radius * 2 + 3.5 * this.size_max + 2 * this.padding;
+            return this.radius * 2 + 3.5 * this.font_size_max + 2 * this.padding;
         },
         get_area_height(){
-            return this.radius * 2 + this.size_max + 2 * this.padding;
+            return this.radius * 2 + this.font_size_max + 2 * this.padding;
         }
         // setTimeOut ? -> to look up
     },
