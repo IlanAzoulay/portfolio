@@ -2,7 +2,6 @@
   <!-- on peut avoir qu'une seule balise dans template -->
   <div :class="`w-full grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
 
-    <!-- <div class="pageBackground relative" :style="`grid-column-end: ${col_end};`"> -->
     <div class="pageBackground">
       
       <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
@@ -40,7 +39,8 @@
       
     </div>
 
-    <div v-show="!mobile" :style="`grid-row-start: 1; grid_column-start: ${size_bigger_grid-1};`">
+    <div v-show="!mobile" class="relative w-full"
+      :style="`grid-row-start: 1; grid-column-start: ${size_bigger_grid-1}; grid-column-end: ${size_bigger_grid};`">
       <RightBar/>
     </div>
 
@@ -64,9 +64,6 @@ export default {
   data(){
     /* on definit toutes les variables ici, marche un peu comme un JSON */
     return {
-      numbers: [1, 2, 3],
-      name: 'Ilan',  /* utiliser des single quotes */
-      blue_futurist: '#00FFEA',
       scroll_var: 0,
       col_end: undefined,
       scroll_arrow: {

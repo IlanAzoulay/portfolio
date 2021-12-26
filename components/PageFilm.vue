@@ -11,7 +11,7 @@
                 Below is a list of my most important works.
             </p>
             <p class="pt-1">
-                <em>(Hover for details, click to go to video)</em>
+                <em>{{instruction_sentence}}</em>
             </p>
 
             <div class="grid-thumbnails">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div v-else class="w-full grid grid-cols-3 pt-2 gap-x-2 items-center">
+                    <div v-else class="w-full grid grid-cols-3 pt-2 gap-x-2 items-start">
                         <a :href="`${mini.link}`" target="_blank" rel="noopener noreferrer" class="col-span-1">
                             <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail ml-0 my-auto"
                                 style="box-shadow: 0 0 1vw white;">
@@ -61,7 +61,8 @@ export default {
         return {
             thumbnails: data.filmography,
             cols_pc: 4,
-            pic_size_mobile: undefined
+            pic_size_mobile: undefined,
+            instruction_sentence: '(Hover for details, click to go to video)'
         };
     },
 
@@ -70,6 +71,10 @@ export default {
         root.style.setProperty('--thumbnail-size', this.get_superbox_size());
         root.style.setProperty('--thumbnail-grow', 0.1);
         root.style.setProperty('--transition-time', 0.5);
+
+        if (this.mobile){
+            this.instruction_sentence = '(click on thumbnails to go to video)'
+        }
     },
 
     methods: {

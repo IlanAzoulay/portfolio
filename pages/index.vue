@@ -1,6 +1,9 @@
 <template>
     <div class="min-w-full min-h-full">
 
+        <PageLoading
+            :mobile="mobile"/>
+
         <div class="grid_all">
 
             <div class="fixed z-10 sm:z-0 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1"
@@ -22,7 +25,8 @@
                         :mobile="mobile" />
                     <PageFilm id="film"
                         :mobile="mobile"/>
-                    <PageContact id="contact"/>
+                    <PageContact id="contact"
+                        :mobile="mobile"/>
                 </div>
                 
             </div>
@@ -34,7 +38,11 @@
 </template>
 
 <script>
+import PageLoading from '@/components/PageLoading.vue'
 export default {
+    components: {
+        PageLoading
+    },
     data() {
         return {
             mobile: false,

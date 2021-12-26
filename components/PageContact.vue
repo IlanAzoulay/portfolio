@@ -28,6 +28,7 @@
                 </div>
 
                 <MyPopup ref="popup"
+                    :mobile="mobile"
                     :message="popup_Message"/>
 
             </div>
@@ -39,9 +40,13 @@
 
 
 <script>
+import emailjs from 'emailjs-com';
 import MyPopup from '@/components/MyPopup.vue'
 
 export default {
+    props: {
+        mobile: Boolean
+    },
     components: {
         MyPopup
     },

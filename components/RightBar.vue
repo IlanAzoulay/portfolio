@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen">
+    <div class="relative min-h-screen">
 
         <div class="flex flex-row space-x-4 justify-center pt-8 pb-2">
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_UK_flag.png" class="flag" 
@@ -10,7 +10,7 @@
                 @click="english = false">
         </div>
 
-        <h2 v-show="!english">
+        <h2 v-show="!english" class="absolute mx-auto text-center w-full">
             VF pas encore disponible
         </h2>
 

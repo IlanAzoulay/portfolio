@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen">
-            
+
         <div class="flex py-4 flex-col sm:flex-row items-center sm:items-start">
             
             <div class="pb-0 sm:pb-4">
@@ -47,7 +47,7 @@
 
 <script>
 import SphereTest from "@/components/SphereTest.vue";
-import data from '~/static/data/data.json'
+import data from '~/static/data/data.json';
 
 export default {
     props: {
