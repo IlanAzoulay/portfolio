@@ -3,7 +3,7 @@
 
         <div class="grid_all">
 
-            <div class="fixed z-10 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1"
+            <div class="fixed z-10 sm:z-0 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1"
                 :style="`${get_nav_style()}`">
                 <Navbar :mobile="mobile"/>
             </div>

@@ -13,19 +13,23 @@
                 <div class="col-span-2 col-start-1 col-end-3 row-start-1">
                     <form class=" flex flex-col space-y-4 sm:space-y-6">
                         <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-6">
-                            <input v-model="user.name" type="text_small" placeholder="Your name" required>
-                            <input v-model="user.email" type="email" placeholder="youraddress@protonmail.com" required>
+                            <input v-model="name" type="text_small" placeholder="Your name" required>
+                            <input v-model="email" type="email" placeholder="youraddress@protonmail.com" required>
                         </div>
-                        <input v-model="user.subject" type="text_small" placeholder="Subject" required>
-                        <textarea v-model="user.message" placeholder="Hi Ilan! I am writing to you about..." required/>
+                        <input v-model="subject" type="text_small" placeholder="Subject" required>
+                        <textarea v-model="message" placeholder="Hi Ilan! I am writing to you about..." required/>
                     </form>
                 </div>
 
                 <div class="relative w-min pt-4 mx-auto sm:mr-0 sm:ml-auto col-start-1 sm:col-start-2 col-end-3">
-                    <div class="button_futurist">
+                    <div class="button_futurist" @click="checkInput">
                         SEND MESSAGE
                     </div>
                 </div>
+
+                <MyPopup ref="popup"
+                    :message="popup_Message"/>
+
             </div>
 
         </div>
@@ -35,16 +39,46 @@
 
 
 <script>
+import MyPopup from '@/components/MyPopup.vue'
+
 export default {
+    components: {
+        MyPopup
+    },
     data(){
         /* on definit toutes les variables ici, marche un peu comme un JSON */
         return {
-            user: {
-                name: "",
-                email: "",
-                subject: "",
-                message: ""
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+            popup_Message: ''
+        }
+    },
+    methods: {
+        checkInput() {
+            if (!this.name.length || !this.email.length || !this.message.length) {
+                this.popup_Message = 'Please fill all the fields';
+                this.$refs.popup.activate();
+            } else {
+                this.sendEmail();
+                this.popup_Message = 'The message was sent successfully. Thanks!';
+                this.$refs.popup.activate();
             }
+        },
+        sendEmail() {
+            emailjs.send(
+                process.env.NUXT_ENV_EMAILJS_SERVICEID,
+                process.env.NUXT_ENV_EMAILJS_TEMPLATEID,
+                {
+                    subject: this.subject,
+                    from_name: this.name,
+                    from_email: this.email,
+                    message: this.message
+                },
+                process.env.NUXT_ENV_EMAILJS_USERID
+            );
+            this.name = this.email = this.message = this.subject = '';
         }
     }
 }

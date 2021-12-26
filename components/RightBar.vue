@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen">
 
-        <div class="flex flex-row space-x-4 justify-center py-8">
+        <div class="flex flex-row space-x-4 justify-center pt-8 pb-2">
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_UK_flag.png" class="flag" 
                 v-bind:class="english?'flag-selected':'flag-unselected'"
                 @click="english = true">
@@ -9,6 +9,10 @@
                 v-bind:class="!english?'flag-selected':'flag-unselected'"
                 @click="english = false">
         </div>
+
+        <h2 v-show="!english">
+            VF pas encore disponible
+        </h2>
 
     </div>
 </template>
@@ -32,10 +36,11 @@ export default {
 
 
 <style scoped>
+    h2 {
+        @apply text-white opacity-50 text-center text-sm;
+    }
     .flag {
         @apply cursor-pointer w-12 top-2 right-2;
-        /* top: 2vh;
-        right: 2vw; */
         transition: all 0.5s;
     }
     .flag-selected {

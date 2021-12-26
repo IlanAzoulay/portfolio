@@ -28,7 +28,6 @@ export default {
         font-family: Arial;
         font-weight: normal;
         white-space: nowrap;
-        /* font-size: 1.5vw; */
         display: block;
         background: linear-gradient(to right, cyan 50%, transparent 50%);
         background-position: right center;
