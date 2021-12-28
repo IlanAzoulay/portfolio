@@ -14,7 +14,8 @@
                 :font_size_min="font_size_min"
                 :font_size_max="font_size_max"
                 :blur_max="blur_max"
-                :padding="padding"
+                :padding_x="padding_x"
+                :padding_y="padding_y"
             />
         </div>
     </div>
@@ -23,7 +24,6 @@
 
 <script>
 import SphereItem from "@/components/SphereItem.vue";
-// import data from '~/static/data/data.json'
 
 export default {
     props: {
@@ -50,6 +50,10 @@ export default {
         update_interval: {
             type: Number,
             default: 15 // milliseconds
+        },
+        extra_padding: {
+            type: Number,
+            default: 2
         }
     },
     components: {
@@ -59,26 +63,33 @@ export default {
         return {
             active: false,
             timer: undefined,
+            timer_slow: undefined,
             rotation_matrix: undefined,
 
             // Input coords
             mouse_x: 0,
             mouse_y: 0,
 
-            padding: undefined,
+            padding_x: undefined,
+            padding_y: undefined,
             font_size_min: undefined,
 
             // Center coord of the area
             center_x: undefined,
             center_y: undefined,
 
-            speed_max: 1, // degrees (avoid touching this, it's better to change the interval for speed)
+            speed_max: 1,  // degrees (avoid touching this, it's better to change the interval for speed)
+            speed: 0,
+            slowing_factor: 50,  // change this one at will
+
+            autonomous_move: undefined,
+            bounding_box: undefined
         };
     },
 
     beforeMount(){
         this.rotation_matrix = this.get_euler_matrix(0, 0, 0);  // Initialize Euler matrix
-        this.padding = this.radius / 5;
+        this.estimate_padding();
         this.font_size_min = this.font_size_max / 2;
     },
     mounted(){
@@ -129,55 +140,108 @@ export default {
         },
 
         start_roll(event){
+            this.autonomous_move = false;
             this.active = true;
             this.mouse_x = event.clientX;
             this.mouse_y = event.clientY;
 
             // Get coord of element (in pixels)
-            var composant = document.getElementById("sphere").getBoundingClientRect();
-            this.center_x = composant.left + composant.width / 2;
-            this.center_y = composant.top + composant.height / 2;
+            this.bounding_box = document.getElementById("sphere").getBoundingClientRect();
+            this.center_x = this.bounding_box.left + this.bounding_box.width / 2;
+            this.center_y = this.bounding_box.top + this.bounding_box.height / 2;
 
+            this.speed = this.speed_max;
             var ref = this;  // IMPORTANT to avoid mismatch with "this"
+            clearInterval(this.timer);
+            clearInterval(this.timer_slow);
             this.timer = setInterval( function() { 
-                ref.sphere_roll(composant.left, composant.top, composant.width, composant.height);
+                ref.sphere_roll();
             }, this.update_interval);
         },
+
         end_roll(){
             this.active = false;
             clearInterval(this.timer);
+
+            // Slow the movement until zero
+            var slowing = this.speed / this.slowing_factor;
+            var ref = this;
+            this.timer_slow = setInterval( function() { 
+                ref.speed -= slowing;
+                if ( ref.speed <= 0){clearInterval(ref.timer_slow); ref.speed = 0;}
+                ref.sphere_roll();
+            }, this.update_interval);
         },
+
         update_roll(event) {
             if (this.active) {
                 this.mouse_x = event.clientX;
                 this.mouse_y = event.clientY;
             }
         },
-        sphere_roll(left, top, width, height){
+        sphere_roll(){
             // AXIS DIRECTIONS: Z: up - Y: right - X towards user
             // Rotations: around Z: left-right - around Y: up-down
 
-            var move = this.get_sphere_movement(left, top, width, height);
+            var move = this.get_sphere_movement();
             this.rotation_matrix = this.get_euler_matrix(0, move[1], move[0]);
         },
-        get_sphere_movement(left, top, width, height){
+        get_sphere_movement(){
             return [
-                this.get_speed(left, width, this.mouse_x),
-                (-1)*this.get_speed(top, height, this.mouse_y)
+                this.get_speed(this.bounding_box.left, this.bounding_box.width, this.mouse_x),
+                (-1)*this.get_speed(this.bounding_box.top, this.bounding_box.height, this.mouse_y)
             ];
         },
         get_speed(coord_start, size, mouse){
             // More or less fast depending on how far from the center
-            return 2*(this.speed_max / size) * (mouse - coord_start - (size/2));
+            return 2*(this.speed / size) * (mouse - coord_start - (size/2));
         },
 
         get_area_width(){
-            return this.radius * 2 + 3.5 * this.font_size_max + 2 * this.padding;
+            // return this.radius * 2 + 3.5 * this.font_size_max + 2 * this.padding;
+            return 2 * (this.radius + this.padding_x);
         },
         get_area_height(){
-            return this.radius * 2 + this.font_size_max + 2 * this.padding;
+            return 2 * (this.radius + this.padding_y);
+        },
+
+        // A very optional method, to move the sphere autonomously before the user does it manually
+        start_autonomous_move(){
+            if (typeof this.autonomous_move == 'undefined'){
+                this.autonomous_move = true;
+
+                this.bounding_box = document.getElementById("sphere").getBoundingClientRect();
+                this.center_x = this.bounding_box.left + this.bounding_box.width / 2;
+                this.center_y = this.bounding_box.top + this.bounding_box.height / 2;
+
+                this.mouse_x = this.bounding_box.left;
+                this.mouse_y = this.bounding_box.top + this.bounding_box.height*(3/4);
+
+                this.speed = this.speed_max/4;
+                var ref = this;  // IMPORTANT to avoid mismatch with "this"
+                this.timer = setInterval( function() { 
+                    ref.sphere_roll();
+                }, this.update_interval);
+
+            }
+        },
+
+        estimate_padding(axe_x){
+            // According to my calculations: 
+            // Text width (approx) = Len * fontsize * 0.4 (rem)
+            // Text height = 2 * fontsize (rem)
+
+            this.padding_y =(this.extra_padding + 2 * this.font_size_max);
+
+            var max = this.items_list[0];
+            for (let i = 1; i < this.items_list.length; i++){
+                if (max.length < this.items_list[i].length){
+                    max = this.items_list[i];
+                }
+            }
+
+            this.padding_x = this.extra_padding + (max.length * this.font_size_max * 0.4)/2;
         }
-        // setTimeOut ? -> to look up
     },
 
 }

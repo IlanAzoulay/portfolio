@@ -1,7 +1,7 @@
 <template>
     <div class="absolute top-0 left-0 w-full h-full">
         <h1 :style="`top: ${get_top()}rem; left: ${get_left()}rem; filter: ${get_blur()}; font-size: ${get_size()}rem;
-        opacity: ${get_opacity()}; color: ${text_color}`" >
+        opacity: ${get_opacity()}; color: ${text_color}`">
             {{text}}
         </h1>
     </div>
@@ -21,7 +21,8 @@ export default {
         font_size_min: Number,
         font_size_max: {type: Number, required: true},
         blur_max: {type: Number, required: true},
-        padding: Number,
+        padding_x: Number,
+        padding_y: Number
     },
     data() {
         return {
@@ -91,10 +92,10 @@ export default {
         },
 
         get_top(){
-            return this.padding + this.radius + this.radius * this.pos_z;
+            return this.padding_y/2 + this.radius + this.radius * this.pos_z;
         },
         get_left(){
-            return this.padding + this.radius + this.radius * this.pos_y;
+            return this.padding_x + this.radius + this.radius * this.pos_y;
         },
 
         get_linear_value(coord, min, max) {
@@ -123,5 +124,6 @@ export default {
         position: absolute;
         transition: all 0.0s;
         white-space: nowrap;
+        transform: translateX(-50%);
     }
 </style>

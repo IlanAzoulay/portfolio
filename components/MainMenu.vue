@@ -8,12 +8,10 @@
 
       <div class="flex flex-col space-y-0">
         <h1 class="text-center">
-          <!-- Engineer. Director. -->
-          Software. 3D. Robotics.
+          Software. 3D. Front-end.
         </h1>
 
         <h2 class="text-center">
-          <!-- Software development - Embedded systems - 3D - Animation -->
           I make algorithms. Any sector. I solve problems.
         </h2>
       </div>
@@ -24,7 +22,7 @@
         </div>
       </div>
 
-      <div class="mx-auto scroll_arrow" @click="scrollto('about')">
+      <div class="mx-auto scroll_arrow" @click="scrollto('about')" :style="`opacity: ${scroll_arrow.opacity};`" >
           <h3>
             scroll down
           </h3>
@@ -68,22 +66,19 @@ export default {
       col_end: undefined,
       scroll_arrow: {
         max_opacity: 0.5,
-        max_scroll: 350
-      }
+        opacity: 0.5,
+        max_scroll: 500
+      },
     };
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
 
   beforeMount() {
     window.addEventListener("scroll", this.onScroll);
-    let root = document.documentElement;
-    root.style.setProperty('--col-end', this.get_col_end());
-    root.style.setProperty('--scroll-arrow-opacity', this.opacity_updated());
+    document.documentElement.style.setProperty('--col-end', this.get_col_end());
   },
   mounted() {
-    let root = document.documentElement;
-    root.style.setProperty('--col-end', this.get_col_end());
-    root.style.setProperty('--scroll-arrow-opacity', this.opacity_updated());
+    document.documentElement.style.setProperty('--col-end', this.get_col_end());
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
@@ -93,22 +88,21 @@ export default {
 
     onScroll(e) {
       this.scroll_var = window.scrollY; /* or: e.target.documentElement.scrollTop */
-      // this.scrolldown.opacity = this.opacity_updated();
-      let root = document.documentElement;
-      root.style.setProperty('--scroll-arrow-opacity', this.opacity_updated());
+      this.update_opacity();
     },
 
-    opacity_updated(){
+    update_opacity(){
 
-      if (this.scroll_var > this.scroll_arrow.max_scroll){return 0;}
+      if (this.scroll_var > this.scroll_arrow.max_scroll){this.scroll_arrow.opacity = 0;}
+      else {
+        var new_opacity = (this.scroll_var) / this.scroll_arrow.max_scroll;  // Pourcentage du scroll
+        new_opacity = (1 - new_opacity);  // Inverser le pourcentage
 
-      var new_opacity = (this.scroll_var) / this.scroll_arrow.max_scroll;  // Pourcentage du scroll
-      new_opacity = (1 - new_opacity);  // Inverser le pourcentage
+        // Appliquer a l'echelle
+        new_opacity = this.scroll_arrow.max_opacity * new_opacity
 
-      // Appliquer a l'echelle
-      new_opacity = this.scroll_arrow.max_opacity * new_opacity
-
-      return new_opacity;
+        this.scroll_arrow.opacity = new_opacity;
+      }
     },
 
     arrondir(nombre, decimal){
@@ -156,6 +150,5 @@ export default {
 
   .scroll_arrow{
     @apply cursor-pointer absolute bottom-2;
-    opacity: var(--scroll-arrow-opacity);
   }
 </style>

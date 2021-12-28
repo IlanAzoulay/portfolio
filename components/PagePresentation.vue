@@ -36,7 +36,7 @@
                 </p>
             </div>
 
-            <SphereTest
+            <SphereTest id="id_sphere_object" ref="ref_sphere_object"
                 :items_list="sphere_items"
                 :radius="sphere_radius"
                 :text_color="'cyan'"
@@ -64,11 +64,24 @@ export default {
         }
     },
 
-    mounted(){
+    beforeMount(){
         if (this.mobile){
-            this.sphere_radius = 6;
+            this.sphere_radius = 7;
             this.sphere_font_size = 1;
         }
+    },
+    mounted(){
+        window.addEventListener("scroll", this.onScroll);
+    },
+
+    methods: {
+        onScroll(e) {
+            // Quand la sphere devient visible
+            if (document.getElementById("id_sphere_object").getBoundingClientRect().top <= window.innerHeight){
+                this.$refs.ref_sphere_object.start_autonomous_move();
+                window.removeEventListener("scroll", this.onScroll);
+            }
+        },
     }
 }
 </script>
