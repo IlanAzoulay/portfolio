@@ -52,8 +52,7 @@ export default {
     },
 
     beforeMount() {
-        let root = document.documentElement;
-        root.style.setProperty('--col-number', this.size_grid);
+        document.documentElement.style.setProperty('--col-number', this.size_grid);
 
         this.mobile = this.isMobile;
         if (this.mobile){
