@@ -88,7 +88,7 @@ export default {
     document.documentElement.style.setProperty('--col-end', this.get_col_end());
 
     if (this.mobile){
-      this.title_fontsize = 2;
+      this.title_fontsize = 1.75;
     }
   },
   mounted() {
