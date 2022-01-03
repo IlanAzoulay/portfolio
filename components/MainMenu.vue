@@ -7,9 +7,16 @@
       <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
       <div class="flex flex-col space-y-0">
-        <h1 class="text-center">
+        <!-- <h1 class="text-center">
           Software. 3D. Front-end.
-        </h1>
+        </h1> -->
+
+        <LetterAnimation
+          :text="'Software. 3D. Front-end.'"
+          :fontsize="title_fontsize"
+          :color="'cyan'"
+          :color2="'white'"
+          :mobile="mobile"/>
 
         <h2 class="text-center">
           I make algorithms. Any sector. I solve problems.
@@ -48,10 +55,12 @@
 <script>
 /* a l'interieur d'ici se trouve du javascript */
 import RightBar from "@/components/RightBar.vue";
+import LetterAnimation from "@/components/LetterAnimation.vue";
 
 export default {
   components: {
-    RightBar
+    RightBar,
+    LetterAnimation
   },
 
   props: {
@@ -69,6 +78,7 @@ export default {
         opacity: 0.5,
         max_scroll: 500
       },
+      title_fontsize: 2.75
     };
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
@@ -76,6 +86,10 @@ export default {
   beforeMount() {
     window.addEventListener("scroll", this.onScroll);
     document.documentElement.style.setProperty('--col-end', this.get_col_end());
+
+    if (this.mobile){
+      this.title_fontsize = 2;
+    }
   },
   mounted() {
     document.documentElement.style.setProperty('--col-end', this.get_col_end());
