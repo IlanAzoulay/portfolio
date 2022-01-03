@@ -6,15 +6,26 @@ export default {
       lang: 'en'
     },
     meta: [
+      // DEFAULT STUFF
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
       // OG Image: Thumbnail
       {
         hid: 'og:image',
         property: 'og:image',
         content: '/OG_image.png'
+      },
+      // SEO
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Freelance developper, specialized in algorithms, software, front-end and 3D'
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: 'Ilan, Azoulay, Ingénieur, logiciel, software, front-end, développeur, developper, engineer, 3D, Nuxt, JS, Vue, Nuxtjs, Vuejs, animation, front end, freelance'
       }
     ],
     link: [

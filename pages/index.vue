@@ -40,6 +40,7 @@
 <script>
 import PageLoading from '@/components/PageLoading.vue'
 export default {
+
     components: {
         PageLoading
     },
