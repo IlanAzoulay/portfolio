@@ -243,19 +243,9 @@ export default {
             this.padding_x = this.extra_padding + (max.length * this.font_size_max * 0.4)/2;
         }
     },
-
 }
 </script>
 
-
 <style scoped>
-    .sphere_item {
-        @apply text-cyan;
-        font-family: Arial;
-        font-size: var(--sphere-item-size);
-    }
-    .bouton {
-        @apply cursor-pointer text-white py-2;
-        font-family: Arial;
-    }
+
 </style>
