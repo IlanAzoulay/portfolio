@@ -118,7 +118,7 @@
             "year": "2021 - ...",
             "post": "CEO - Project founder",
             "description": "Creating a web3 (blockchain) application to help users inform themselves on the ethical considerations of their purchases, vote with their wallet",
-            "environment": "Blockchain - Solidity"
+            "environment": "Vue JS - Nuxt JS - Solidity"
             }
         ]
     },
@@ -166,12 +166,13 @@
         "Procedural",
         "Database",
         "3D Design",
-        "Electronics"
+        "Electronics",
+        "Blockchain"
     ],
     "skills": [
         {
             "title": "Programming languages",
-            "content": "C, C++, Python, Java, VBA, SQL, HTML/CSS/Javascript"
+            "content": "C, C++, Python, Java, HTML/CSS/Javascript, VBA, SQL, Solidity"
         },
         {
             "title": "Embedded systems",

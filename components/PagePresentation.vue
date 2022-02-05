@@ -20,7 +20,7 @@
                 </p>
                 <br>
                 <p>
-                    I apply my skills to software development, embedded systems, 3D programming, and interface development.
+                    I apply my skills to software development, embedded systems, 3D programming, interface development, and Blockchain.
                     No matter the sector, I always find my way through that same core that is algorithmic problem-solving.
                 </p>
                 <br>
@@ -36,7 +36,7 @@
                 </p>
             </div>
 
-            <SphereTest id="id_sphere_object" ref="ref_sphere_object"
+            <WordSphere id="id_sphere_object" ref="ref_sphere_object"
                 :items_list="sphere_items"
                 :radius="sphere_radius"
                 :text_color="'cyan'"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import SphereTest from "@/components/SphereTest.vue";
+import WordSphere from "@/components/WordSphere.vue";
 import data from '~/static/data/data.json';
 
 export default {
@@ -54,7 +54,7 @@ export default {
         mobile: Boolean
     },
     components: {
-        SphereTest
+        WordSphere
     },
     data() {
         return {

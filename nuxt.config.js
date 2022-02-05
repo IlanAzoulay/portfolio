@@ -25,7 +25,7 @@ export default {
       {
         hid: 'keywords',
         name: 'keywords',
-        content: 'Ilan, Azoulay, Ingénieur, logiciel, software, front-end, développeur, developper, engineer, 3D, Nuxt, JS, Vue, Nuxtjs, Vuejs, animation, front end, freelance'
+        content: 'Ilan, Azoulay, Ingénieur, logiciel, software, front-end, développeur, developper, engineer, 3D, Nuxt, JS, Vue, Nuxtjs, Vuejs, animation, front end, freelance, blockchain'
       }
     ],
     link: [
