@@ -9,17 +9,23 @@
             <!-- textes -->
             <div class="textbox">
                 <div class="pt-4 pb-2 text-justify">
-                    <h2>Most of my professional experience can be summed up by this one sentence:</h2>
-                    <h2><em>"This is what we're trying to do. Ilan, find how to do it"</em>.</h2>
                     <h2>
-                    With a clear goal in mind, I work relentlessly, autonomously adapt to new technologies, and always reach the desired destination.
+                        I have started my engineering journey with a master's degree in software and embedded systems programming.
+                        As a 3D artist, I have also applied these skills to 3D applications
                     </h2>
                     <br>
                     <h2>
-                    I have created mathematic algorithms to solve financial statements at SAP. Designed a database software for the Ministry of the Armed Forces,
-                    Built a program to randomly generate photorealistic CGI to train an AI. 
-                    Oversaw the entire development of a semi-autonomous robot arm for wheelchairs.
-                    Created a 3D simulation to stabilize a satellite. And many more.
+                        Since graduating, I have worked on projects including mathematical algorithms, database, 3D development,
+                        front-end UIs, back-end development, and game development.
+                    </h2>
+                    <br>
+                    <h2>
+                        This diversity of projects illustrates my signature ability to quickly learn new technologies and
+                        adapt to new environments.
+                    </h2>
+                    <br>
+                    <h2>
+                        If you are hesitating whether I could fit within your project, hesitate no more!
                     </h2>
 
                     <br>

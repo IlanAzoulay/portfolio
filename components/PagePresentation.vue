@@ -8,32 +8,43 @@
                     Salut ! I'm Ilan Azoulay
                 </h1>
                 <p>
-                    Creativity. Freedom. Innovation.
+                    I am a developper from Paris, France.
                 </p>
                 <p>
-                    These are my 3 most important values. These are what lead me to become who I am today.
+                    I specialize in programming and algorithms, applied to multiple areas:
+
                 </p>
+                <ul>
+                    <li>Backend</li>
+                    <li>Frontend</li>
+                    <li>3D</li>
+                    <li>Software</li>
+                    <li>Blockchain</li>
+                </ul>
+
                 <br>
                 <p>
-                    I am an engineer because I love the process of crafting algorithms.
-                    Infinite ways to approach any approach any problem freely, pure logic and problem-solving.
+                    I have a great passion in autonomously solving problems, 
+                    freely finding how to reach a goal.
                 </p>
-                <br>
-                <p>
-                    I apply my skills to software development, embedded systems, 3D programming, interface development, and Blockchain.
-                    No matter the sector, I always find my way through that same core that is algorithmic problem-solving.
-                </p>
+
                 <br>
                 <p>
                     I am also an artist. I write, direct and produce animated short films and music videos.
                     An endeavor that I consider a strong support for my engineering projects.               
                     My films and music have garnered millions of views internationally, and been nominated to film festivals.
                 </p>
+
                 <br>
                 <p>
-                    Finally, I am an activist. As the founder of the <em>Walletvote</em> project, 
-                    I am leading the development of a blockchain-based platform to bring ethics and responsibility to the free market.
+                    Interested in any freelance project involving creativity and innovation,
+                    and with a friendly, Human-scale team and environment
                 </p>
+
+                <br>
+                <div class="pcyan"> 
+                    Let's create something together!
+                </div>
             </div>
 
             <WordSphere id="id_sphere_object" ref="ref_sphere_object"
@@ -87,9 +98,15 @@ export default {
 </script>
 
 <style scoped>
-    p{
+    p, ul, .pcyan{
         @apply text-white text-opacity-80 text-base;
         font-family: Arial;
         text-align: justify;
+    }
+    ul {
+        @apply pl-4;
+    }
+    .pcyan {
+        @apply text-cyan font-bold;
     }
 </style>

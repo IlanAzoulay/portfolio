@@ -12,7 +12,7 @@
         </h1> -->
 
         <LetterAnimation
-          :text="'Software. 3D. Front-end.'"
+          :text="'Fullstack. 3D. Software.'"
           :fontsize="title_fontsize"
           :color="'cyan'"
           :color2="'white'"

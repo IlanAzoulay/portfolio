@@ -71,7 +71,7 @@
             "post": "Project manager",
             "description": "Design, construction, and development of a robotic arm with semi-autonomous guiding for wheelchair users",
             "environment": "Java - Python - Solidworks - Raspberry Pi"
-        },
+            },
             {
             "filename": "ECE3SAT",
             "title": "ECE3SAT",
@@ -119,6 +119,14 @@
             "post": "CEO - Project founder",
             "description": "Creating a web3 (blockchain) application to help users inform themselves on the ethical considerations of their purchases, vote with their wallet",
             "environment": "Vue JS - Nuxt JS - Solidity"
+            },
+            {
+            "filename": "Assembly",
+            "title": "THE ASSEMBLY",
+            "year": "2022 - ...",
+            "post": "Backend developper",
+            "description": "Developping the back-end, interface, and mechanics of a blockchain-based game",
+            "environment": "C# - Unity - Blockchain"
             }
         ]
     },
@@ -156,27 +164,21 @@
         ]
     },
     "sphere_items": [
-        "Robotics",
         "Software",
         "3D Dev",
         "Interface",
-        "Firmware",
         "Front-end",
+        "Back-end",
         "Algorithms",
         "Procedural",
         "Database",
-        "3D Design",
-        "Electronics",
-        "Blockchain"
+        "Blockchain",
+        "Unity"
     ],
     "skills": [
         {
             "title": "Programming languages",
-            "content": "C, C++, Python, Java, HTML/CSS/Javascript, VBA, SQL, Solidity"
-        },
-        {
-            "title": "Embedded systems",
-            "content": "Linux, Arduino, Microcontrollers (PIC), STM32"
+            "content": "C, C++, c#, Python, Java, HTML/CSS/Javascript, VBA, SQL, Solidity"
         },
         {
             "title": "3D",
@@ -184,11 +186,15 @@
         },
         {
             "title": "Interface development",
-            "content": "Nuxt JS, Vue JS, Qt, java Windowbuilder"
+            "content": "Nuxt JS, Vue JS, Qt, Unity"
         },
         {
             "title": "Communication protocols",
             "content": "Wi-fi, Bluetooth/BLE, UART"
+        },
+        {
+            "title": "Embedded systems",
+            "content": "Linux, Arduino, Microcontrollers (PIC), STM32"
         },
         {
             "title": "Others",
