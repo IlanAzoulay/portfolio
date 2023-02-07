@@ -93,7 +93,7 @@
             "title": "DIRECTION GENERALE DE L'ARMEMENT",
             "year": "2018",
             "post": "Database engineer",
-            "description": "Developping an interface to automate, synchronise, secure and simplify database operations",
+            "description": "Developing an interface to automate, synchronise, secure and simplify database operations",
             "environment": "VBA - SQL"
             },
             {
@@ -124,9 +124,17 @@
             "filename": "Assembly",
             "title": "THE ASSEMBLY",
             "year": "2022 - ...",
-            "post": "Backend developper",
-            "description": "Developping the back-end, interface, and mechanics of a blockchain-based game",
+            "post": "Full Stack developer",
+            "description": "Developing the back-end, interface, and mechanics of a blockchain-based game",
             "environment": "C# (.NET) - Unity - MongoDB - Blockchain"
+            },
+            {
+            "filename": "Admire",
+            "title": "ADMIRE",
+            "year": "2022-2023",
+            "post": "Full Stack developer",
+            "description": "Developing the back-end and front-end of an online marketplace website",
+            "environment": "Vue JS - Typescript - Nest JS - SQL - Prisma"
             }
         ]
     },
@@ -178,11 +186,15 @@
     "skills": [
         {
             "title": "Programming languages",
-            "content": "C, C++, c#, Python, Java, HTML/CSS/Javascript, VBA, Solidity"
+            "content": "Javascript, Typescript, HTML/CSS, C, C++, C#, Python, Java, Solidity"
         },
         {
-            "title": "Frameworks",
-            "content": ".NET, Nuxt JS, Vue JS, Qt"
+            "title": "Front-end",
+            "content": "Vue JS, React JS, Nuxt JS, Next JS"
+        },
+        {
+            "title": "Back-end",
+            "content": "Nest JS, .NET, Node JS"
         },
         {
             "title": "3D",
@@ -190,15 +202,11 @@
         },
         {
             "title": "Database",
-            "content": "MongoDB, JSON, SQL"
-        },
-        {
-            "title": "Communication protocols",
-            "content": "Wi-fi, Bluetooth/BLE, UART"
+            "content": "JSON, SQL, MongoDB, Prisma"
         },
         {
             "title": "Others",
-            "content": "Git, bpy, Linux, Arduino"
+            "content": "NPM, Git, web3.js, bpy, Linux, Arduino"
         }
     ],
     "navbar_buttons": [

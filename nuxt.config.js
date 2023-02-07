@@ -20,12 +20,12 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Freelance developper, specialized in algorithms, full stack, software and 3D'
+        content: 'Freelance developer, specialized in algorithms, full stack, software and 3D'
       },
       {
         hid: 'keywords',
         name: 'keywords',
-        content: 'Ilan, Azoulay, Ingénieur, logiciel, software, front-end, frontend, front end, développeur, developper, engineer, 3D, Nuxt, JS, Vue, Nuxtjs, Vuejs, animation, freelance, blockchain, backend, back-end, back end, UI, unity'
+        content: 'Ilan, Azoulay, Ingénieur, logiciel, software, front-end, frontend, front end, développeur, developer, engineer, 3D, Nuxt, JS, Vue, Nuxtjs, Vuejs, animation, freelance, blockchain, backend, back-end, back end, UI, unity'
       }
     ],
     link: [
@@ -65,5 +65,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  server: {
+    port: 8000 // default: 3000
   }
 }

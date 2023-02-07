@@ -8,7 +8,7 @@
                     Salut ! I'm Ilan Azoulay
                 </h1>
                 <p>
-                    I am a developper from Paris, France.
+                    I am a developer from Paris, France.
                 </p>
                 <p>
                     I specialize in programming and algorithms, applied to multiple areas:
