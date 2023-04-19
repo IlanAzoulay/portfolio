@@ -11,7 +11,7 @@
         </div >
 
         <!-- CONTENT -->
-        <div class="relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen"
+        <div class="bar-content"
             style="transition: left .5s ease-out;" :style="(opened || !mobile) ? 'left: 0;' : 'left: 100vw;'">
 
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_A.png" name='A'
@@ -121,9 +121,15 @@ export default {
     .bar {
         @apply block absolute h-1 w-8 bg-current transform transition duration-500 ease-in-out;
     }
-    .content {
-        @apply flex flex-col sm:flex-row items-center w-full sm:w-auto shadow-lg sm:shadow-none pb-4 sm:pb-0 sm:px-10 space-y-4 sm:space-y-0;
+    .bar-content {
+        @apply relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen;
+        @apply sm:border-r-2 border-cyan;
     }
+    /* @media (min-width: 640px){
+        .bar-content {
+            border-right-width: 1px;
+        }
+    } */
     /* Slide transition */
     .slide-enter-active {
         -moz-transition-duration: 0.3s;

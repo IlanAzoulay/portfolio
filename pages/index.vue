@@ -6,7 +6,7 @@
 
         <div class="grid_all">
 
-            <div class="fixed z-10 sm:z-0 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1"
+            <div class="navbar"
                 :style="`${get_nav_style()}`">
                 <Navbar :mobile="mobile"/>
             </div>
@@ -100,26 +100,8 @@ export default {
 <style scoped>
     .grid_all {
         @apply flex flex-col sm:grid sm:grid-cols-6 sm:grid-rows-1;
-        /* display: grid; */
-        /* grid-template-columns: repeat(var(--col-number), minmax(0, 1fr)); */
-        /* grid-template-rows: repeat(1, minmax(0, 1fr)); */
     }
-    .fixedBar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: calc((100/var(--col-number)) * 1%);
-    }
-    .gauche {
-        @apply col-start-1 col-end-2 row-start-1;
-        /* grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1; */
-    }
-    .droite {
-        @apply col-start-2 col-end-7 row-start-1;
-        /* grid-column-start: 2;
-        grid-column-end: calc(1 + var(--col-number));
-        grid-row-start: 1; */
+    .navbar {
+        @apply fixed z-10 sm:z-0 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1;
     }
 </style>

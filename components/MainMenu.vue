@@ -4,7 +4,7 @@
 
     <div class="pageBackground">
       
-      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
+      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/Sceau_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
       <div class="flex flex-col space-y-0">
         <!-- <h1 class="text-center">
