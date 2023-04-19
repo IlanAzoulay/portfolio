@@ -190,11 +190,11 @@
         },
         {
             "title": "Front-end",
-            "content": "Vue JS, React JS, Nuxt JS, Next JS"
+            "content": "Vue.js, React.js, Nuxt.js, Next.js"
         },
         {
             "title": "Back-end",
-            "content": "Nest JS, .NET, Node JS"
+            "content": "Nest.js, .NET, Node.js"
         },
         {
             "title": "3D",
@@ -206,7 +206,7 @@
         },
         {
             "title": "Others",
-            "content": "NPM, Git, web3.js, bpy, Linux, Arduino"
+            "content": "NPM, Git, web3.js, bpy"
         }
     ],
     "navbar_buttons": [

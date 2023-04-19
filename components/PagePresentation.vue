@@ -45,6 +45,13 @@
                 <div class="pcyan"> 
                     Let's create something together!
                 </div>
+                <br>
+                <p class="italic">
+                    PS: Do you like that sphere on the right? This is one of my open-source creations! <br>
+                    <a href="https://www.npmjs.com/package/wordsphere">Wordsphere</a> - 
+                    <a href="https://www.npmjs.com/package/vue-single-select-v2">Dropdown</a> - 
+                    <a href="https://github.com/IlanAzoulay/FastOcean_New">FastOcean</a>
+                </p>
             </div>
 
             <WordSphere id="id_sphere_object" ref="ref_sphere_object"
@@ -108,5 +115,8 @@ export default {
     }
     .pcyan {
         @apply text-cyan font-bold;
+    }
+    a {
+        @apply text-cyan;
     }
 </style>
