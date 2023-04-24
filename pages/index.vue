@@ -27,6 +27,9 @@
                         :mobile="mobile"/>
                     <PageContact id="contact"
                         :mobile="mobile"/>
+                    <!-- <Retrowave
+                        :startHeight="70"
+                        :blurredPerspective="true"/> -->
                 </div>
                 
             </div>

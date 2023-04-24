@@ -1,8 +1,8 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
-  <div :class="`w-full grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
+  <div :class="`main-menu-parent grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
 
-    <div class="pageBackground">
+    <div class="page-background">
       
       <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/Sceau_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
@@ -12,7 +12,7 @@
         </h1> -->
 
         <LetterAnimation
-          :text="'Fullstack. 3D. Software.'"
+          :text="'Front-end. Back-end. 3D.'"
           :fontsize="title_fontsize"
           :color="'cyan'"
           :color2="'white'"
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="mx-auto scroll_arrow" @click="scrollto('about')" :style="`opacity: ${scroll_arrow.opacity};`" >
+      <div class="mx-auto scroll-arrow" @click="scrollto('about')" :style="`opacity: ${scroll_arrow.opacity};`" >
           <h3>
             scroll down
           </h3>
@@ -49,6 +49,12 @@
       <RightBar/>
     </div>
 
+    <Retrowave 
+      style="height: 100vh"
+      :background-color="'#231c27'"
+      :offset-vertical-lines-x="mobile? 0 : -9.6"
+      :start-height="75"
+      :blurred-perspective="true"/>
   </div>
 </template>
 
@@ -155,14 +161,19 @@ export default {
     @apply text-white text-sm;
     font-family: Arial;
   }
-  .pageBackground {
+  .main-menu-parent {
+    @apply w-full;
+    box-shadow: 1px 3px 1vw blueviolet;
+    margin-bottom: 10px;
+  }
+  .page-background {
     @apply relative w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0;
     grid-column-start: 1;
     grid-row-start: 1;
     grid-column-end: var(--col-end);
   }
 
-  .scroll_arrow{
+  .scroll-arrow{
     @apply cursor-pointer absolute bottom-2;
   }
 </style>
