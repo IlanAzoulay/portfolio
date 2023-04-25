@@ -4,28 +4,28 @@
         <PageLoading
             :mobile="mobile"/>
 
-        <div class="grid_all">
+        <div class="grid-all">
 
             <div class="navbar"
-                :style="`${get_nav_style()}`">
-                <Navbar :mobile="mobile"/>
+                :style="`${getNavStyle()}`">
+                <navbar :mobile="mobile"/>
             </div>
 
-            <div class="relative z-0 sm:col-start-2 sm:row-start-1" :style="`${get_main_style()}`">
+            <div class="relative z-0 sm:col-start-2 sm:row-start-1" :style="`${getMainStyle()}`">
                 <MainMenu id="home" 
                     :mobile="mobile" 
-                    :size_bigger_grid="size_grid"
+                    :size_bigger_grid="gridSize"
                 />
-                <div class="w-full" :style="`padding: 0 ${padding_universal}rem;`" >
-                    <PagePresentation id="about" 
+                <div class="w-full" :style="`padding: 0 ${paddingUniversal}rem;`" >
+                    <page-presentation id="about" 
                         :mobile="mobile" />
-                    <PageEngineering id="engineering"
+                    <page-engineering id="engineering"
                         :mobile="mobile"/>
-                    <ProjectHistory id="history"
+                    <project-history id="history"
                         :mobile="mobile" />
-                    <PageFilm id="film"
+                    <page-film id="film"
                         :mobile="mobile"/>
-                    <PageContact id="contact"
+                    <page-contact id="contact"
                         :mobile="mobile"/>
                     <!-- <Retrowave
                         :startHeight="70"
@@ -50,17 +50,17 @@ export default {
     data() {
         return {
             mobile: false,
-            size_grid: 6,
-            padding_universal: 3.5
+            gridSize: 6,
+            paddingUniversal: 3.5
         }
     },
 
     beforeMount() {
-        document.documentElement.style.setProperty('--col-number', this.size_grid);
+        document.documentElement.style.setProperty('--col-number', this.gridSize);
 
         this.mobile = this.isMobile;
         if (this.mobile){
-            this.padding_universal = 2;
+            this.paddingUniversal = 2;
         }
     },
     // mounted() {
@@ -73,25 +73,25 @@ export default {
     },
 
     methods: {
-        get_col_start(){
+        getColumnStart(){
             if (this.mobile){
                 return 1;
             } else {
                 return 2;
             }
         },
-        get_nav_style(){
+        getNavStyle(){
             if (!this.mobile){
-                var pourcentage = 100/this.size_grid;
+                var pourcentage = 100/this.gridSize;
                 return ("grid-column-end: 2; width: " + pourcentage + "%;");
             } else {
                 return "width: 100%";
             }
         },
-        get_main_style(){
+        getMainStyle(){
             if (!this.mobile){
-                // var pourcentage = 100 * ((this.size_grid - 1)/this.size_grid);
-                return ("grid-column-start: 2; grid-column-end: " + (this.size_grid+1) + "; grid-row-start: 1; width: 100%;");
+                // var pourcentage = 100 * ((this.gridSize - 1)/this.gridSize);
+                return ("grid-column-start: 2; grid-column-end: " + (this.gridSize+1) + "; grid-row-start: 1; width: 100%;");
             } else {
                 return "width: 100%";
             }
@@ -101,10 +101,10 @@ export default {
 </script>
 
 <style scoped>
-    .grid_all {
+    .grid-all {
         @apply flex flex-col sm:grid sm:grid-cols-6 sm:grid-rows-1;
     }
     .navbar {
-        @apply fixed z-10 sm:z-0 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1;
+        @apply fixed z-10 sm:z-20 top-0 left-0 sm:col-start-1 sm:col-end-2 sm:row-start-1;
     }
 </style>

@@ -13,7 +13,7 @@
 
         <LetterAnimation
           :text="'Front-end. Back-end. 3D.'"
-          :fontsize="title_fontsize"
+          :fontsize="titleFontSize"
           :color="'cyan'"
           :color2="'white'"
           :mobile="mobile"/>
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="mx-auto scroll-arrow" @click="scrollto('about')" :style="`opacity: ${scroll_arrow.opacity};`" >
+      <div class="mx-auto scroll-arrow" @click="scrollto('about')" :style="`opacity: ${scrollArrow.opacity};`" >
           <h3>
             scroll down
           </h3>
@@ -50,7 +50,7 @@
     </div>
 
     <Retrowave 
-      style="height: 100vh"
+      :style="{'height': retroHeight}"
       :background-color="'#231c27'"
       :offset-vertical-lines-x="mobile? 0 : -9.6"
       :start-height="75"
@@ -77,51 +77,60 @@ export default {
   data(){
     /* on definit toutes les variables ici, marche un peu comme un JSON */
     return {
-      scroll_var: 0,
-      col_end: undefined,
-      scroll_arrow: {
-        max_opacity: 0.5,
+      scrollVar: 0,
+      columnEnd: undefined,
+      scrollArrow: {
+        maxOpacity: 0.5,
         opacity: 0.5,
-        max_scroll: 500
+        maxScroll: 500
       },
-      title_fontsize: 2.75
+      titleFontSize: 2.75,
+      retroHeight: '100vh',
     };
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
 
   beforeMount() {
     window.addEventListener("scroll", this.onScroll);
-    document.documentElement.style.setProperty('--col-end', this.get_col_end());
+    window.addEventListener("resize", this.resizeBrowserHandler);
+    document.documentElement.style.setProperty('--col-end', this.getColumnEnd());
 
     if (this.mobile){
-      this.title_fontsize = 1.75;
+      this.titleFontSize = 1.75;
     }
   },
   mounted() {
-    document.documentElement.style.setProperty('--col-end', this.get_col_end());
+    document.documentElement.style.setProperty('--col-end', this.getColumnEnd());
+    this.retroHeight = document.getElementById('home').getBoundingClientRect().height + 'px';
+    // console.log('height: ', parent)
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.resizeBrowserHandler);
   },
 
   methods:{  /* Definir les fonctions */
 
-    onScroll(e) {
-      this.scroll_var = window.scrollY; /* or: e.target.documentElement.scrollTop */
-      this.update_opacity();
+    resizeBrowserHandler (e) {
+      this.retroHeight = document.getElementById('home').getBoundingClientRect().height + 'px';
     },
 
-    update_opacity(){
+    onScroll(e) {
+      this.scrollVar = window.scrollY; /* or: e.target.documentElement.scrollTop */
+      this.updateOpacity();
+    },
 
-      if (this.scroll_var > this.scroll_arrow.max_scroll){this.scroll_arrow.opacity = 0;}
+    updateOpacity(){
+
+      if (this.scrollVar > this.scrollArrow.maxScroll){this.scrollArrow.opacity = 0;}
       else {
-        var new_opacity = (this.scroll_var) / this.scroll_arrow.max_scroll;  // Pourcentage du scroll
+        var new_opacity = (this.scrollVar) / this.scrollArrow.maxScroll;  // Pourcentage du scroll
         new_opacity = (1 - new_opacity);  // Inverser le pourcentage
 
         // Appliquer a l'echelle
-        new_opacity = this.scroll_arrow.max_opacity * new_opacity
+        new_opacity = this.scrollArrow.maxOpacity * new_opacity
 
-        this.scroll_arrow.opacity = new_opacity;
+        this.scrollArrow.opacity = new_opacity;
       }
     },
 
@@ -133,7 +142,7 @@ export default {
       document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
     },
 
-    get_col_end(){
+    getColumnEnd(){
       if (this.mobile){
         return this.size_bigger_grid;  // Va faire toute la largeur si on est en mobile
       } else {
