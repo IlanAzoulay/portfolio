@@ -1,6 +1,6 @@
 {
     "filmography": {
-        "source_thumbnails": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/thumbnails/Thumbnail_",
+        "sourceThumbnails": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/thumbnails/Thumbnail_",
         "miniatures": [
             {
             "filename": "Censor",
@@ -62,8 +62,8 @@
     },
 
     "projets": {
-        "source_logos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
-        "list_logos": [
+        "sourceLogos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
+        "listLogos": [
             {
             "filename": "AssistArm",
             "title": "ASSIST'ARM",
@@ -139,8 +139,8 @@
         ]
     },
 
-    "presentation_pics": {
-        "source_pics": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_",
+    "presentationPics": {
+        "sourcePics": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_",
         "right": [
             {
                 "filename": "Naval",
@@ -171,7 +171,7 @@
             }
         ]
     },
-    "sphere_items": [
+    "sphereItems": [
         "Software",
         "3D Dev",
         "Interface",
@@ -209,7 +209,7 @@
             "content": "NPM, Git, web3.js, bpy"
         }
     ],
-    "navbar_buttons": [
+    "navbarButtons": [
         {
             "title": "About",
             "href": "about"

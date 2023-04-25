@@ -1,11 +1,11 @@
 <template>
-    <div class="min-h-screen py-8 sm:py-2 pb-8">
+    <div class="page-engineering-parent">
 
         <h1>
             MY ENGINEERING PORTFOLIO
         </h1>
 
-        <div class="flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 sm:gap-y-1" id="engineering_grid">
+        <div class="page-engineering" id="engineering_grid">
             <!-- textes -->
             <div class="textbox">
                 <div class="pt-4 pb-2 text-justify">
@@ -38,7 +38,7 @@
 
                     <div class="flex flex-row space-x-6">
                         <!-- Colonne 1 -->
-                        <ul class="skills_list">
+                        <ul class="skills-list">
                             <li v-for='(skill, index) in skills' :key='index'>
                                 <div class="font-bold">
                                     {{skill.title}}
@@ -49,7 +49,7 @@
                             </li>
                         </ul>
                         <!-- Colonne 2 -->
-                        <ul v-show="!mobile" class="skills_list font-normal">
+                        <ul v-show="!mobile" class="skills-list font-normal">
                             <li v-for='(skill, index) in skills' :key='index'>
                                 {{skill.content}}
                             </li>
@@ -60,10 +60,10 @@
 
             <!-- photos a droite -->
             <div v-show="!mobile" class="pics-right">
-                <div class="grid_right">
-                    <div v-for='(pic, index) in pics_data.right' :key='index' class="picture_superbox">
-                        <div class="picture_box">
-                            <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                <div class="grid-right">
+                    <div v-for='(pic, index) in picsData.right' :key='index' class="picture-superbox">
+                        <div class="picture-box">
+                            <img v-bind:src="picsData.sourcePics + pic.filename + '.png'" class="picture">
                             <div>
                                 <h3>{{pic.description}}</h3>
                                 <h3><em>{{pic.env}}</em></h3>
@@ -75,10 +75,10 @@
 
             <!-- photos en bas -->
             <div v-show="!mobile" class="pics-bottom">
-                <div class="grid_bottom">
-                    <div v-for='(pic, index) in pics_data.bottom' :key='index' class="picture_superbox">
-                        <div class="picture_box">
-                            <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                <div class="grid-bottom">
+                    <div v-for='(pic, index) in picsData.bottom' :key='index' class="picture-superbox">
+                        <div class="picture-box">
+                            <img v-bind:src="picsData.sourcePics + pic.filename + '.png'" class="picture">
                             <div>
                                 <h3>{{pic.description}}</h3>
                                 <h3><em>{{pic.env}}</em></h3>
@@ -90,8 +90,8 @@
 
             <!-- photos pour mobile -->
             <div v-show="mobile" class="grid grid-cols-2 gap-y-2 pt-4">
-                <div v-for='(pic, index) in pics_all' :key='index'>
-                    <img v-bind:src="pics_data.source_pics + pic.filename + '.png'" class="picture">
+                <div v-for='(pic, index) in picsAll' :key='index'>
+                    <img v-bind:src="picsData.sourcePics + pic.filename + '.png'" class="picture">
                     <div>
                         <h3>{{pic.description}}</h3>
                         <h3><em>{{pic.env}}</em></h3>
@@ -113,11 +113,11 @@ export default {
     },
     data() {
         return {
-            pics_data: data.presentation_pics,
-            pics_all: [],
+            picsData: data.presentationPics,
+            picsAll: [],
             skills: data.skills,
-            cols_pc: 3,
-            offset_pc: 5
+            colsPC: 3,
+            offsetPC: 5
         };
     },
 
@@ -136,7 +136,7 @@ export default {
         get_superbox_size(){
             var composant = document.getElementById("engineering_grid").getBoundingClientRect();
             if (!this.mobile){
-                return (this.convert_px_to_vw(composant.width) / this.cols_pc) - this.offset_pc;
+                return (this.convert_px_to_vw(composant.width) / this.colsPC) - this.offsetPC;
             } else {
                 return this.convert_px_to_vw(composant.width);
             }
@@ -145,11 +145,11 @@ export default {
             return px * (100 / document.documentElement.clientWidth);
         },
         fill_pics_array(){
-            for (let index = 0; index < this.pics_data.right.length; ++index){
-                this.pics_all.push(this.pics_data.right[index]);
+            for (let index = 0; index < this.picsData.right.length; ++index){
+                this.picsAll.push(this.picsData.right[index]);
             }
-            for (let index = 0; index < this.pics_data.bottom.length; ++index){
-                this.pics_all.push(this.pics_data.bottom[index]);
+            for (let index = 0; index < this.picsData.bottom.length; ++index){
+                this.picsAll.push(this.picsData.bottom[index]);
             }
         }
     }
@@ -161,6 +161,12 @@ export default {
         @apply text-white text-opacity-80 text-base;
         font-family: Arial;
         /* text-align: justify; */
+    }
+    .page-engineering-parent {
+        @apply min-h-screen py-8 sm:py-2 pb-8;
+    }
+    .page-engineering {
+        @apply flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-3 sm:gap-y-1;
     }
     .textbox {
         grid-column-start: 1;
@@ -174,7 +180,7 @@ export default {
         grid-row-start: 1;
         grid-row-end: 3;
     }
-    .grid_right {
+    .grid-right {
         @apply content-center gap-y-2;
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -182,7 +188,7 @@ export default {
         height: 100%;
         width: 100%;
     }
-    .grid_bottom {
+    .grid-bottom {
         @apply content-center gap-x-2;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -196,18 +202,18 @@ export default {
         grid-row-start: 3;
         grid-row-end: 4;
     }
-    .picture_superbox{
+    .picture-superbox{
         @apply top-0 mx-auto;
         width: calc(var(--pic-size) * 1vw);
         height: calc(var(--pic-size) * 1vh);
     }
-    .picture_box{
+    .picture-box{
         @apply mx-auto relative top-0;
         width: calc((1 - var(--pic-grow)) * 100%);
         height: calc((1 - var(--pic-grow)) * 100%);
         transition: all calc(var(--transition-time) * 1s);
     }
-    .picture_box:hover {
+    .picture-box:hover {
         @apply mx-auto top-0;
         width: 100%;
         height: 100%;
@@ -221,11 +227,11 @@ export default {
         font-family: Arial;
         transition: all calc(var(--transition-time) * 1s);
     }
-    .picture_box:hover h3 {
+    .picture-box:hover h3 {
         padding-left: calc(var(--pic-size) * (var(--pic-grow)/2) * 1vw);
         padding-right: calc(var(--pic-size) * (var(--pic-grow)/2) * 1vw);
     }
-    .skills_list {
+    .skills-list {
         @apply text-white text-opacity-80 text-base;
         @apply space-y-1 text-center sm:text-left;
         font-family: Arial;

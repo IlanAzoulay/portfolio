@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen">
 
-        <div class="flex py-4 flex-col sm:flex-row items-center sm:items-start">
+        <div class="page-presentation">
             
             <div class="pb-0 sm:pb-4">
                 <h1 class="pb-4">
@@ -54,11 +54,11 @@
                 </p>
             </div>
 
-            <WordSphere id="id_sphere_object" ref="ref_sphere_object"
-                :items_list="sphere_items"
-                :radius="sphere_radius"
-                :text_color="'cyan'"
-                :font_size_max="sphere_font_size"/>
+            <word-sphere id="idsphereobject" ref="refsphereobject"
+                :items-list="sphereItems"
+                :radius="sphereRadius"
+                :text-color="'cyan'"
+                :font-size-max="sphereFontSize"/>
         </div>
     </div>    
 </template>
@@ -76,16 +76,16 @@ export default {
     },
     data() {
         return {
-            sphere_items: data.sphere_items,
-            sphere_radius: 12,
-            sphere_font_size: 2
+            sphereItems: data.sphereItems,
+            sphereRadius: 12,
+            sphereFontSize: 2
         }
     },
 
     beforeMount(){
         if (this.mobile){
-            this.sphere_radius = 7;
-            this.sphere_font_size = 1;
+            this.sphereRadius = 7;
+            this.sphereFontSize = 1;
         }
     },
     mounted(){
@@ -95,8 +95,8 @@ export default {
     methods: {
         onScroll(e) {
             // Quand la sphere devient visible
-            if (document.getElementById("id_sphere_object").getBoundingClientRect().top <= window.innerHeight){
-                this.$refs.ref_sphere_object.start_autonomous_move();
+            if (document.getElementById("idsphereobject").getBoundingClientRect().top <= window.innerHeight){
+                this.$refs.refsphereobject.startAutonomousMove();
                 window.removeEventListener("scroll", this.onScroll);
             }
         },
@@ -118,5 +118,8 @@ export default {
     }
     a {
         @apply text-cyan;
+    }
+    .page-presentation {
+        @apply flex py-4 flex-col sm:flex-row items-center sm:items-start;
     }
 </style>

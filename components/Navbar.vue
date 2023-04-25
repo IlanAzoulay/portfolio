@@ -20,7 +20,7 @@
             <div class="space-y-0 w-full">
                 <div v-for='(button, index) in buttonsTab' :key='index'>
                     <div @click="scrollto(button.href); opened = !opened">
-                        <div class="button_normal" :class="index === 0 ? 'border-t':''">
+                        <div class="button-normal" :class="index === 0 ? 'border-t':''">
                             {{button.title}}
                         </div>
                     </div>
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             opened: false,
-            buttonsTab: data.navbar_buttons
+            buttonsTab: data.navbarButtons
         };
     },
 
@@ -71,7 +71,7 @@ export default {
         scrollto(destination){
             document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
         },
-        get_pos(){
+        getPos(){
             if (!this.mobile || this.opened){
                 return '0';
             } else {
@@ -85,7 +85,7 @@ export default {
 
 <style scoped>
     /* scoped: les classes CSS definies ici ne s'appliquent pas dans les autres fichiers */
-    .button_normal{
+    .button-normal{
         /* @apply pour faire le tailwind */
         @apply cursor-pointer text-white border-white border-b py-3 text-opacity-75 hover:text-opacity-100;
         @apply w-full text-center min-w-full border-opacity-75;
@@ -95,7 +95,7 @@ export default {
         text-shadow: none;
         transition: all .5s ease-out;
     }
-    .button_normal:hover{
+    .button-normal:hover{
         @apply text-cyan;
         text-shadow: 0 0 0.2vw cyan;
     }

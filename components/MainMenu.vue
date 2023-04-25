@@ -1,6 +1,6 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
-  <div :class="`main-menu-parent grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
+  <div :class="`main-menu-parent grid grid-cols-${sizeBiggerGrid-1} grid-rows-1`">
 
     <div class="page-background">
       
@@ -45,7 +45,7 @@
     </div>
 
     <div v-show="!mobile" class="relative w-full"
-      :style="`grid-row-start: 1; grid-column-start: ${size_bigger_grid-1}; grid-column-end: ${size_bigger_grid};`">
+      :style="`grid-row-start: 1; grid-column-start: ${sizeBiggerGrid-1}; grid-column-end: ${sizeBiggerGrid};`">
       <RightBar/>
     </div>
 
@@ -71,7 +71,7 @@ export default {
 
   props: {
     mobile: Boolean,
-    size_bigger_grid: Number  // La RightBar doit faire la meme taille que Navbar pour center MainMenu
+    sizeBiggerGrid: Number  // La RightBar doit faire la meme taille que Navbar pour center MainMenu
   },
   
   data(){
@@ -124,13 +124,13 @@ export default {
 
       if (this.scrollVar > this.scrollArrow.maxScroll){this.scrollArrow.opacity = 0;}
       else {
-        var new_opacity = (this.scrollVar) / this.scrollArrow.maxScroll;  // Pourcentage du scroll
-        new_opacity = (1 - new_opacity);  // Inverser le pourcentage
+        var newOpacity = (this.scrollVar) / this.scrollArrow.maxScroll;  // Pourcentage du scroll
+        newOpacity = (1 - newOpacity);  // Inverser le pourcentage
 
         // Appliquer a l'echelle
-        new_opacity = this.scrollArrow.maxOpacity * new_opacity
+        newOpacity = this.scrollArrow.maxOpacity * newOpacity
 
-        this.scrollArrow.opacity = new_opacity;
+        this.scrollArrow.opacity = newOpacity;
       }
     },
 
@@ -144,9 +144,9 @@ export default {
 
     getColumnEnd(){
       if (this.mobile){
-        return this.size_bigger_grid;  // Va faire toute la largeur si on est en mobile
+        return this.sizeBiggerGrid;  // Va faire toute la largeur si on est en mobile
       } else {
-        return (this.size_bigger_grid - 1);  // Sur PC, laisse la place a RightBar
+        return (this.sizeBiggerGrid - 1);  // Sur PC, laisse la place a RightBar
       }
     }
   }

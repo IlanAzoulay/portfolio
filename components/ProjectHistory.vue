@@ -10,15 +10,15 @@
             <em>(hover for details)</em>
         </p>
         <div class="grid-logos" id="project_grid">
-            <div v-for='(logo, index) in projets.list_logos' :key='index'>
+            <div v-for='(logo, index) in projets.listLogos' :key='index'>
 
-                <div class="logo_superbox" >
+                <div class="logo-superbox" >
 
-                    <div :class="selected === index ? 'logo_box_selected' : 'logo_box'" @click="select_project(index)">
+                    <div :class="selected === index ? 'logo-box_selected' : 'logo-box'" @click="select_project(index)">
 
-                        <img v-bind:src="projets.source_logos + logo.filename + '.png'"
-                            :class="selected === index ? 'logo_selected' : 'logo'">
-                        <div :class="selected === index ? 'project_details_selected' : 'project_details'">
+                        <img v-bind:src="projets.sourceLogos + logo.filename + '.png'"
+                            :class="selected === index ? 'logo-selected' : 'logo'">
+                        <div :class="selected === index ? 'project-details-selected' : 'project-details'">
                             <h2><b>{{logo.title}}</b></h2>
                             <h2><em>({{logo.year}})</em></h2>
                             <h3>- {{logo.post}} -</h3>
@@ -46,24 +46,24 @@ export default {
             index: undefined,
             projets: data.projets,
             selected: undefined,
-            cols_pc: 4,
-            box_grow: 0.1,
-            box_size: undefined
+            colsPC: 4,
+            boxGrow: 0.1,
+            boxSize: undefined
         };
     },
 
     mounted() {
         let root = document.documentElement;
-        root.style.setProperty('--box-size', this.get_superbox_size());
-        root.style.setProperty('--box-grow', this.box_grow);
+        root.style.setProperty('--box-size', this.get_superboxSize());
+        root.style.setProperty('--box-grow', this.boxGrow);
         root.style.setProperty('--transition-time', 0.5);
     },
 
     methods:{
-        get_superbox_size(){
+        get_superboxSize(){
             var composant = document.getElementById("project_grid").getBoundingClientRect();
             if (!this.mobile){
-                return this.convert_px_to_vw(composant.width) / this.cols_pc;
+                return this.convert_px_to_vw(composant.width) / this.colsPC;
             } else {
                 return this.convert_px_to_vw(composant.width);
             }
@@ -95,12 +95,12 @@ export default {
         @apply sm:grid sm:grid-cols-4 sm:grid-rows-2
     }
 
-    .logo_superbox {
+    .logo-superbox {
         @apply mx-auto sm:ml-0 sm:mr-auto my-auto;
         width: calc(var(--box-size) * 1vw);
         height: calc(var(--box-size) * 1vw);
     }
-    .logo_box {
+    .logo-box {
         @apply bg-gray_moi-light m-auto;
         @apply text-opacity-0 text-white;
         box-shadow: 0 0 0.25rem white;
@@ -110,7 +110,7 @@ export default {
         top: calc(var(--box-grow) * 50%);
         transition: all calc(var(--transition-time) * 1s);
     }
-    .logo_box:hover {
+    .logo-box:hover {
         @apply text-opacity-100;
         top: 0;
         width: 100%;
@@ -122,10 +122,10 @@ export default {
         @apply m-auto opacity-100 p-2;
         transition: all calc(var(--transition-time) * 1s);
     }
-    .logo_box:hover .logo {
+    .logo-box:hover .logo {
         @apply opacity-5;
     }
-    .project_details {
+    .project-details {
         @apply text-white text-center text-base;
         @apply opacity-0;
         position: absolute;
@@ -136,7 +136,7 @@ export default {
         width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
         transition: all calc(var(--transition-time) * 1s);
     }
-    .logo_box:hover .project_details {
+    .logo-box:hover .project-details {
         @apply opacity-100;
     }
     h3 {
@@ -144,7 +144,7 @@ export default {
     }
 
 
-    .logo_box_selected {
+    .logo-box_selected {
         @apply bg-gray_moi-light m-auto;
         position: relative;
         top: 0;
@@ -153,7 +153,7 @@ export default {
         box-shadow: 0 0 0.75rem cyan;
         transition: all calc(var(--transition-time) * 1s);
     }
-    .project_details_selected {
+    .project-details-selected {
         @apply text-white text-center text-base;
         @apply opacity-100;
         position: absolute;
@@ -164,7 +164,7 @@ export default {
         width: calc(var(--box-size) * (1 - var(--box-grow)) * 1vw);
         transition: all calc(var(--transition-time) * 1s);
     }
-    .logo_selected {
+    .logo-selected {
         @apply m-auto opacity-5 p-2;
         transition: all calc(var(--transition-time) * 1s);
     }

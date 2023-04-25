@@ -14,7 +14,7 @@
             <div class="relative z-0 sm:col-start-2 sm:row-start-1" :style="`${getMainStyle()}`">
                 <MainMenu id="home" 
                     :mobile="mobile" 
-                    :size_bigger_grid="gridSize"
+                    :size-bigger-grid="gridSize"
                 />
                 <div class="w-full" :style="`padding: 0 ${paddingUniversal}rem;`" >
                     <page-presentation id="about" 
