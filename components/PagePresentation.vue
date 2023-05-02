@@ -42,15 +42,16 @@
                 </p>
 
                 <br>
-                <div class="pcyan"> 
+                <div class="pcyan cursor-pointer" @click="scrollto('contact')"> 
                     Let's create something together!
                 </div>
                 <br>
                 <p class="italic">
                     PS: Do you like that sphere on the right? This is one of my open-source creations! <br>
-                    <a href="https://www.npmjs.com/package/wordsphere">Wordsphere</a> - 
-                    <a href="https://www.npmjs.com/package/vue-single-select-v2">Dropdown</a> - 
-                    <a href="https://github.com/IlanAzoulay/FastOcean_New">FastOcean</a>
+                    <a href="https://www.npmjs.com/package/wordsphere" target="_blank" rel="noopener noreferrer">Wordsphere</a> - 
+                    <a href="https://www.npmjs.com/package/vue-retro-grid" target="_blank" rel="noopener noreferrer">RetroGrid</a> - 
+                    <a href="https://www.npmjs.com/package/vue-single-select-v2" target="_blank" rel="noopener noreferrer">Dropdown</a> - 
+                    <a href="https://github.com/IlanAzoulay/FastOcean_New" target="_blank" rel="noopener noreferrer">FastOcean</a>
                 </p>
             </div>
 
@@ -99,6 +100,9 @@ export default {
                 this.$refs.refsphereobject.startAutonomousMove();
                 window.removeEventListener("scroll", this.onScroll);
             }
+        },
+        scrollto(destination){
+            document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
         },
     }
 }
