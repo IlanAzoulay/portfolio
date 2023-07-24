@@ -5,7 +5,7 @@
             
             <div class="pb-0 sm:pb-4">
                 <h1 class="pb-4">
-                    Salut ! I'm Ilan Azoulay
+                    Bonjour! I'm Ilan Azoulay
                 </h1>
                 <p>
                     I am a developer from Paris, France.
@@ -24,8 +24,7 @@
 
                 <br>
                 <p>
-                    I have a great passion in autonomously solving problems, 
-                    freely finding how to reach a goal.
+                    I have a great passion in building new things from scratch, solving problems, and working in autonomy.
                 </p>
 
                 <br>
@@ -38,7 +37,7 @@
                 <br>
                 <p>
                     Interested in any freelance project involving creativity and innovation,
-                    and with a friendly, Human-scale team and environment
+                    and with a friendly, small-scale team and environment
                 </p>
 
                 <br>
