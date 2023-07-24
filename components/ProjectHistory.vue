@@ -24,7 +24,8 @@
         <!-- Details of specific project -->
         <div v-if="selected !== undefined">
             <div class="black-background" @click="unselect()"></div>
-            <div class="project-details" :class="getAnimationClass()" @click="mobileToggle()">
+            <div class="project-details" @click="mobileToggle()" 
+                :class="opening? 'boing' : closing ? 'fadeout' : ''">
 
                 <img v-bind:src="projets.sourceLogos + projectList[selected].filename + '.png'" class="logo-detail">
 
@@ -53,12 +54,8 @@ export default {
     },
     data() {
         return {
-            index: undefined,
             projets: data.projets,
             selected: undefined,
-            colsPC: 5,
-            boxGrow: 0,
-            boxSize: undefined,
             opening: false,
             closing: false,
             projectList: data.projets.listLogos
@@ -71,7 +68,6 @@ export default {
             this.openingAnimation();
         },
         unselect() {
-            // this.selected = undefined;
             this.closingAnimation();
         },
         mobileToggle(){
@@ -94,11 +90,6 @@ export default {
                 this.closing = false;
             }, 400)
         },
-        getAnimationClass(){
-            if (this.opening) {return "boing";}
-            else if (this.closing) {return "fadeout"}
-            return "";
-        }
     }
 }
 </script>
@@ -108,11 +99,7 @@ export default {
         @apply text-white text-opacity-80 text-base text-center sm:text-left;
         font-family: Arial;
     }
-    /* .grid-logos {
-        @apply flex flex-col w-full py-3 gap-y-0;
-        @apply sm:grid sm:grid-cols-5;
-        @apply sm:gap-x-1 sm:gap-y-1;
-    } */
+
     .grid-logos {
         @apply w-full py-3;
         @apply grid grid-cols-2 sm:grid-cols-5;
