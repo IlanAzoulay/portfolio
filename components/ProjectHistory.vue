@@ -24,8 +24,7 @@
         <!-- Details of specific project -->
         <div v-if="selected !== undefined">
             <div class="black-background" @click="unselect()"></div>
-            <div class="project-details" @click="mobileToggle()" 
-                :class="opening? 'boing' : closing ? 'fadeout' : ''">
+            <div class="project-details" @click="mobileToggle()" :class="getAnimationClass()">
 
                 <img v-bind:src="projets.sourceLogos + projectList[selected].filename + '.png'" class="logo-detail">
 
@@ -86,10 +85,16 @@ export default {
         closingAnimation() {
             this.closing = true;
             setTimeout(() => {
-                this.selected = undefined;
+                
                 this.closing = false;
+                this.selected = undefined;
             }, 400)
         },
+        getAnimationClass() {
+            if (this.closing){return 'fadeout';}
+            if (this.opening){return 'boing';}
+            return '';
+        }
     }
 }
 </script>
@@ -203,17 +208,17 @@ export default {
             transform: translateX(-50%) translateY(-50%) scale(1.2);
         }
         100% {
-            opacity: 100;
+            opacity: 1;
             transform: translateX(-50%) translateY(-50%) scale(1) rotateY(0);
         }
     }
     @keyframes fadeout {
         0% {
-            opacity: 100%;
+            opacity: 1;
             transform: translateX(-50%) translateY(-50%) scale(1);
         }
         100% {
-            opacity: 0%;
+            opacity: 0;
             transform: translateX(-50%) translateY(-50%) scale(0.5);
         }
     }
