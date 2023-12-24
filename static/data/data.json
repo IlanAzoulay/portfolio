@@ -71,7 +71,7 @@
             "post": "Full Stack & database developer",
             "description": "Developing the front-end, back-end, and database of an investors social network",
             "environment": "Vue.js - Nuxt.js - C# - .NET - SQL - Postgres"
-			}
+			},
             {
             "filename": "Admire",
             "title": "ADMIRE",
@@ -159,7 +159,6 @@
             "post": "Project manager",
             "description": "Design, construction, and development of a robotic arm with semi-autonomous guiding for wheelchair users",
             "environment": "Java - Python - Solidworks - Raspberry Pi"
-
             }
         ]
     },

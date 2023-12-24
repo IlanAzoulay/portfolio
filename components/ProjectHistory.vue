@@ -15,7 +15,9 @@
             <div v-for='(logo, index) in projectList' :key='index' class="superlogobox" @click="selectProject(index)">
 
                 <div class="logobox">
-                    <img v-bind:src="projets.sourceLogos + logo.filename + '.png'" class="logo">
+                    <img v-bind:src="projets.sourceLogos + logo.filename + '.png'" 
+                    :alt="'~/static/logos/Logo_' + logo.filename + '.png'"
+                    class="logo">
                 </div>
 
             </div>
