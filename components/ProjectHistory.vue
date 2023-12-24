@@ -17,6 +17,7 @@
                     <div :class="selected === index ? 'logo_box_selected' : 'logo_box'" @click="select_project(index)">
 
                         <img v-bind:src="projets.source_logos + logo.filename + '.png'"
+                            :alt="'../static/logos/Logo_' + logo.filename + '.png'"
                             :class="selected === index ? 'logo_selected' : 'logo'">
                         <div :class="selected === index ? 'project_details_selected' : 'project_details'">
                             <h2><b>{{logo.title}}</b></h2>

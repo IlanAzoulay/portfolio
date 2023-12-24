@@ -118,7 +118,7 @@
             "year": "2021 - ...",
             "post": "CEO - Project founder",
             "description": "Creating a web3 (blockchain) application to help users inform themselves on the ethical considerations of their purchases, vote with their wallet",
-            "environment": "Vue JS - Nuxt JS - Solidity"
+            "environment": "Vue.js - Nuxt.js - Solidity"
             },
             {
             "filename": "Assembly",
@@ -132,9 +132,17 @@
             "filename": "Admire",
             "title": "ADMIRE",
             "year": "2022-2023",
-            "post": "Full Stack developer",
+            "post": "Full Stack & database developer",
             "description": "Developing the back-end and front-end of an online marketplace website",
-            "environment": "Vue JS - Typescript - Nest JS - SQL - Prisma"
+            "environment": "Vue.js - Typescript - Nest.js - SQL - Prisma"
+            },
+            {
+            "filename": "Skade",
+            "title": "SKADE.IO",
+            "year": "2023",
+            "post": "Full Stack & database developer",
+            "description": "Developing the front-end, back-end, and database of an investors social network",
+            "environment": "Vue.js - Nuxt.js - C# - .NET - SQL - Postgres"
             }
         ]
     },
@@ -186,7 +194,7 @@
     "skills": [
         {
             "title": "Programming languages",
-            "content": "Javascript, Typescript, HTML/CSS, C, C++, C#, Python, Java, Solidity"
+            "content": "Javascript, Typescript, HTML/CSS, C#, Python, C, C++, Solidity"
         },
         {
             "title": "Front-end",
@@ -202,11 +210,11 @@
         },
         {
             "title": "Database",
-            "content": "JSON, SQL, MongoDB, Prisma"
+            "content": "JSON, SQL, MongoDB, Prisma, Postgres"
         },
         {
             "title": "Others",
-            "content": "NPM, Git, web3.js, bpy, Linux, Arduino"
+            "content": "NPM, Git, web3.js, bpy, Linux, axios"
         }
     ],
     "navbar_buttons": [
