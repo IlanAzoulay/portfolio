@@ -1,6 +1,6 @@
 {
     "filmography": {
-        "source_thumbnails": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/thumbnails/Thumbnail_",
+        "sourceThumbnails": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/thumbnails/Thumbnail_",
         "miniatures": [
             {
             "filename": "Censor",
@@ -62,72 +62,16 @@
     },
 
     "projets": {
-        "source_logos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
-        "list_logos": [
-            {
-            "filename": "AssistArm",
-            "title": "ASSIST'ARM",
-            "year": "2017-2018",
-            "post": "Project manager",
-            "description": "Design, construction, and development of a robotic arm with semi-autonomous guiding for wheelchair users",
-            "environment": "Java - Python - Solidworks - Raspberry Pi"
-            },
-            {
-            "filename": "ECE3SAT",
-            "title": "ECE3SAT",
-            "year": "2018-2019",
-            "post": "Simulation development",
-            "description": "Implementing a 3D simulation to test the stabilization algorithm of a cubesat nano-satellite",
-            "environment": "Java - C - OpenGL - Arduino - Git"
-            },
-            {
-            "filename": "SAP",
-            "title": "SAP",
-            "year": "2016-2017",
-            "post": "Algorithmics",
-            "description": "Creating an algorithm to fix errors on financial statements caused by rounded numbers",
-            "environment": "Python - VBA"
-            },
-            {
-            "filename": "DGA",
-            "title": "DIRECTION GENERALE DE L'ARMEMENT",
-            "year": "2018",
-            "post": "Database engineer",
-            "description": "Developing an interface to automate, synchronise, secure and simplify database operations",
-            "environment": "VBA - SQL"
-            },
-            {
-            "filename": "Naval",
-            "title": "NAVAL GROUP",
-            "year": "2019",
-            "post": "3D Development",
-            "description": "Training an AI for maritime surveillance with procedurally generated photorealistic CGI",
-            "environment": "Python - Blender - Git - JSON"
-            },
-            {
-            "filename": "DasAv",
-            "title": "DASSAULT AVIATION",
-            "year": "2021",
-            "post": "Consultant",
-            "description": "Upgrading the navigation and armament system of the Rafale jetfighter",
-            "environment": "C - Linux - Git - Qt"
-            },
-            {
-            "filename": "Walletvote",
-            "title": "WALLETVOTE",
-            "year": "2021 - ...",
-            "post": "CEO - Project founder",
-            "description": "Creating a web3 (blockchain) application to help users inform themselves on the ethical considerations of their purchases, vote with their wallet",
-            "environment": "Vue.js - Nuxt.js - Solidity"
-            },
-            {
-            "filename": "Assembly",
-            "title": "THE ASSEMBLY",
-            "year": "2022 - ...",
-            "post": "Full Stack developer",
-            "description": "Developing the back-end, interface, and mechanics of a blockchain-based game",
-            "environment": "C# (.NET) - Unity - MongoDB - Blockchain"
-            },
+        "sourceLogos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
+        "listLogos": [
+			{
+            "filename": "Skade",
+            "title": "SKADE.IO",
+            "year": "2023",
+            "post": "Full Stack & database developer",
+            "description": "Developing the front-end, back-end, and database of an investors social network",
+            "environment": "Vue.js - Nuxt.js - C# - .NET - SQL - Postgres"
+			}
             {
             "filename": "Admire",
             "title": "ADMIRE",
@@ -137,18 +81,91 @@
             "environment": "Vue.js - Typescript - Nest.js - SQL - Prisma"
             },
             {
-            "filename": "Skade",
-            "title": "SKADE.IO",
-            "year": "2023",
-            "post": "Full Stack & database developer",
-            "description": "Developing the front-end, back-end, and database of an investors social network",
-            "environment": "Vue.js - Nuxt.js - C# - .NET - SQL - Postgres"
+            "filename": "Assembly",
+            "title": "THE ASSEMBLY",
+            "year": "2022",
+            "start": "March 2022",
+            "end": "September 2022",
+            "post": "Full Stack developer",
+            "description": "Developing the back-end, interface, and mechanics of a blockchain-based game",
+            "environment": "C# (.NET) - React.js - Unity - MongoDB - Blockchain"
+            },
+            {
+            "filename": "Walletvote",
+            "title": "WALLETVOTE",
+            "year": "2021 - 2022",
+            "start": "January 2021",
+            "end": "August 2022",
+            "post": "CEO - Project founder",
+            "description": "Creating a web3 (blockchain) application to help users inform themselves on the ethical considerations of their purchases, vote with their wallet",
+            "environment": "Vue.js - Nuxt.js - Solidity - Node.js"
+            },
+            {
+            "filename": "DasAv",
+            "title": "DASSAULT AVIATION",
+            "year": "2021",
+            "start": "July 2021",
+            "end": "October 2021",
+            "post": "Consultant",
+            "description": "Upgrading the navigation and armament system of the Rafale jetfighter",
+            "environment": "C - Linux - Git - Qt"
+            },
+            {
+            "filename": "Naval",
+            "title": "NAVAL GROUP",
+            "year": "2019",
+            "start": "April 2019",
+            "end": "October 2019",
+            "post": "3D Development",
+            "description": "Training an AI for maritime surveillance with procedurally generated photorealistic CGI",
+            "environment": "Python - Blender - Git - JSON"
+            },
+            {
+            "filename": "DGA",
+            "title": "DIRECTION GENERALE DE L'ARMEMENT",
+            "year": "2018",
+            "start": "June 2018",
+            "end": "September 2018",
+            "post": "Database engineer",
+            "description": "Developing an interface to automate, synchronise, secure and simplify database operations",
+            "environment": "VBA - SQL"
+            },
+            {
+            "filename": "SAP",
+            "title": "SAP",
+            "year": "2016-2017",
+            "start": "December 2016",
+            "end": "February 2017",
+            "post": "Algorithmics",
+            "description": "Creating an algorithm to fix errors on financial statements caused by rounded numbers",
+            "environment": "Python - VBA"
+            },
+            {
+            "filename": "ECE3SAT",
+            "title": "ECE3SAT",
+            "year": "2018-2019",
+            "start": "September 2018",
+            "end": "February 2018",
+            "post": "Simulation development",
+            "description": "Implementing a 3D simulation to test the stabilization algorithm of a cubesat nano-satellite",
+            "environment": "Java - C - OpenGL - Arduino - Git"
+            },
+            {
+            "filename": "AssistArm",
+            "title": "ASSIST'ARM",
+            "year": "2017-2018",
+            "start": "September 2017",
+            "end": "May 2018",
+            "post": "Project manager",
+            "description": "Design, construction, and development of a robotic arm with semi-autonomous guiding for wheelchair users",
+            "environment": "Java - Python - Solidworks - Raspberry Pi"
+
             }
         ]
     },
 
-    "presentation_pics": {
-        "source_pics": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_",
+    "presentationPics": {
+        "sourcePics": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/res/Preview_",
         "right": [
             {
                 "filename": "Naval",
@@ -179,7 +196,7 @@
             }
         ]
     },
-    "sphere_items": [
+    "sphereItems": [
         "Software",
         "3D Dev",
         "Interface",
@@ -188,8 +205,7 @@
         "Algorithms",
         "Procedural",
         "Database",
-        "Blockchain",
-        "Unity"
+        "Blockchain"
     ],
     "skills": [
         {
@@ -198,11 +214,11 @@
         },
         {
             "title": "Front-end",
-            "content": "Vue JS, React JS, Nuxt JS, Next JS"
+            "content": "Vue.js, React.js, Nuxt.js, Next.js"
         },
         {
             "title": "Back-end",
-            "content": "Nest JS, .NET, Node JS"
+            "content": "Nest.js, .NET, Node.js"
         },
         {
             "title": "3D",
@@ -214,10 +230,10 @@
         },
         {
             "title": "Others",
-            "content": "NPM, Git, web3.js, bpy, Linux, axios"
+            "content": "NPM, Git, axios, web3.js, bpy"
         }
     ],
-    "navbar_buttons": [
+    "navbarButtons": [
         {
             "title": "About",
             "href": "about"

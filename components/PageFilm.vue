@@ -11,7 +11,7 @@
                 Below is a list of my most important works.
             </p>
             <p class="pt-1">
-                <em>{{instruction_sentence}}</em>
+                <em>{{instructionSentence}}</em>
             </p>
 
             <div class="grid-thumbnails">
@@ -20,7 +20,7 @@
                     <div v-if="!mobile" class="superbox">
                         <div class="box">
                             <a :href="`${mini.link}`" target="_blank" rel="noopener noreferrer">
-                                <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail">
+                                <img v-bind:src="thumbnails.sourceThumbnails + mini.filename + '.png'" class="thumbnail">
                                 <h2>{{mini.title}}</h2>
                                 <h2><em class="opacity-80">({{mini.year}})</em></h2>
                                 <div class="video_details">
@@ -32,7 +32,7 @@
 
                     <div v-else class="w-full grid grid-cols-3 pt-2 gap-x-2 items-start">
                         <a :href="`${mini.link}`" target="_blank" rel="noopener noreferrer" class="col-span-1">
-                            <img v-bind:src="thumbnails.source_thumbnails + mini.filename + '.png'" class="thumbnail ml-0 my-auto"
+                            <img v-bind:src="thumbnails.sourceThumbnails + mini.filename + '.png'" class="thumbnail ml-0 my-auto"
                                 style="box-shadow: 0 0 1vw white;">
                         </a>
                         <div class="col-span-2">
@@ -60,9 +60,9 @@ export default {
     data() {
         return {
             thumbnails: data.filmography,
-            cols_pc: 4,
-            pic_size_mobile: undefined,
-            instruction_sentence: '(Hover for details, click to go to video)'
+            colsPC: 4,
+            picSizeMobile: undefined,
+            instructionSentence: '(Hover for details, click to go to video)'
         };
     },
 
@@ -73,7 +73,7 @@ export default {
         root.style.setProperty('--transition-time', 0.5);
 
         if (this.mobile){
-            this.instruction_sentence = '(click on thumbnails to go to video)'
+            this.instructionSentence = '(click on thumbnails to go to video)'
         }
     },
 
@@ -81,10 +81,10 @@ export default {
         get_superbox_size(){
             var composant = document.getElementById("project_grid").getBoundingClientRect();
             if (!this.mobile){
-                return this.convert_px_to_vw(composant.width) / this.cols_pc;
+                return this.convert_px_to_vw(composant.width) / this.colsPC;
             } else {
-                this.pic_size_mobile = this.convert_px_to_vw(composant.width) / 3
-                return this.pic_size_mobile;
+                this.picSizeMobile = this.convert_px_to_vw(composant.width) / 3
+                return this.picSizeMobile;
             }
         },
         convert_px_to_vw(px) {

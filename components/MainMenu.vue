@@ -1,10 +1,10 @@
 <template>
   <!-- on peut avoir qu'une seule balise dans template -->
-  <div :class="`w-full grid grid-cols-${size_bigger_grid-1} grid-rows-1`">
+  <div :class="`main-menu-parent grid grid-cols-${sizeBiggerGrid-1} grid-rows-1`">
 
-    <div class="pageBackground">
+    <div class="page-background">
       
-      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/BM_Evan_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
+      <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/Sceau_Cercle_Blur.png" name='moi' class="w-52 rounded-full mx-auto pt-12 pb-2">
 
       <div class="flex flex-col space-y-0">
         <!-- <h1 class="text-center">
@@ -12,8 +12,8 @@
         </h1> -->
 
         <LetterAnimation
-          :text="'Fullstack. 3D. Software.'"
-          :fontsize="title_fontsize"
+          :text="'Front-end. Back-end. 3D.'"
+          :fontsize="titleFontSize"
           :color="'cyan'"
           :color2="'white'"
           :mobile="mobile"/>
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="mx-auto scroll_arrow" @click="scrollto('about')" :style="`opacity: ${scroll_arrow.opacity};`" >
+      <div class="mx-auto scroll-arrow" @click="scrollto('about')" :style="`opacity: ${scrollArrow.opacity};`" >
           <h3>
             scroll down
           </h3>
@@ -45,10 +45,16 @@
     </div>
 
     <div v-show="!mobile" class="relative w-full"
-      :style="`grid-row-start: 1; grid-column-start: ${size_bigger_grid-1}; grid-column-end: ${size_bigger_grid};`">
+      :style="`grid-row-start: 1; grid-column-start: ${sizeBiggerGrid-1}; grid-column-end: ${sizeBiggerGrid};`">
       <RightBar/>
     </div>
 
+    <Retrowave 
+      :style="{'height': retroHeight}"
+      :background-color="'#231c27'"
+      :offset-vertical-lines-x="mobile? 0 : -9.6"
+      :start-height="75"
+      :blurred-perspective="true"/>
   </div>
 </template>
 
@@ -65,57 +71,66 @@ export default {
 
   props: {
     mobile: Boolean,
-    size_bigger_grid: Number  // La RightBar doit faire la meme taille que Navbar pour center MainMenu
+    sizeBiggerGrid: Number  // La RightBar doit faire la meme taille que Navbar pour center MainMenu
   },
   
   data(){
     /* on definit toutes les variables ici, marche un peu comme un JSON */
     return {
-      scroll_var: 0,
-      col_end: undefined,
-      scroll_arrow: {
-        max_opacity: 0.5,
+      scrollVar: 0,
+      columnEnd: undefined,
+      scrollArrow: {
+        maxOpacity: 0.5,
         opacity: 0.5,
-        max_scroll: 500
+        maxScroll: 500
       },
-      title_fontsize: 2.75
+      titleFontSize: 2.75,
+      retroHeight: '100vh',
     };
   },
   /* ATTENTION: Bien penser a la VIRGULE entre les trucs */
 
   beforeMount() {
     window.addEventListener("scroll", this.onScroll);
-    document.documentElement.style.setProperty('--col-end', this.get_col_end());
+    window.addEventListener("resize", this.resizeBrowserHandler);
+    document.documentElement.style.setProperty('--col-end', this.getColumnEnd());
 
     if (this.mobile){
-      this.title_fontsize = 1.75;
+      this.titleFontSize = 1.75;
     }
   },
   mounted() {
-    document.documentElement.style.setProperty('--col-end', this.get_col_end());
+    document.documentElement.style.setProperty('--col-end', this.getColumnEnd());
+    this.retroHeight = document.getElementById('home').getBoundingClientRect().height + 'px';
+    // console.log('height: ', parent)
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.resizeBrowserHandler);
   },
 
   methods:{  /* Definir les fonctions */
 
-    onScroll(e) {
-      this.scroll_var = window.scrollY; /* or: e.target.documentElement.scrollTop */
-      this.update_opacity();
+    resizeBrowserHandler (e) {
+      this.retroHeight = document.getElementById('home').getBoundingClientRect().height + 'px';
     },
 
-    update_opacity(){
+    onScroll(e) {
+      this.scrollVar = window.scrollY; /* or: e.target.documentElement.scrollTop */
+      this.updateOpacity();
+    },
 
-      if (this.scroll_var > this.scroll_arrow.max_scroll){this.scroll_arrow.opacity = 0;}
+    updateOpacity(){
+
+      if (this.scrollVar > this.scrollArrow.maxScroll){this.scrollArrow.opacity = 0;}
       else {
-        var new_opacity = (this.scroll_var) / this.scroll_arrow.max_scroll;  // Pourcentage du scroll
-        new_opacity = (1 - new_opacity);  // Inverser le pourcentage
+        var newOpacity = (this.scrollVar) / this.scrollArrow.maxScroll;  // Pourcentage du scroll
+        newOpacity = (1 - newOpacity);  // Inverser le pourcentage
 
         // Appliquer a l'echelle
-        new_opacity = this.scroll_arrow.max_opacity * new_opacity
+        newOpacity = this.scrollArrow.maxOpacity * newOpacity
 
-        this.scroll_arrow.opacity = new_opacity;
+        this.scrollArrow.opacity = newOpacity;
       }
     },
 
@@ -127,11 +142,11 @@ export default {
       document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
     },
 
-    get_col_end(){
+    getColumnEnd(){
       if (this.mobile){
-        return this.size_bigger_grid;  // Va faire toute la largeur si on est en mobile
+        return this.sizeBiggerGrid;  // Va faire toute la largeur si on est en mobile
       } else {
-        return (this.size_bigger_grid - 1);  // Sur PC, laisse la place a RightBar
+        return (this.sizeBiggerGrid - 1);  // Sur PC, laisse la place a RightBar
       }
     }
   }
@@ -155,14 +170,19 @@ export default {
     @apply text-white text-sm;
     font-family: Arial;
   }
-  .pageBackground {
+  .main-menu-parent {
+    @apply w-full;
+    box-shadow: 1px 3px 1vw blueviolet;
+    margin-bottom: 10px;
+  }
+  .page-background {
     @apply relative w-full flex flex-col px-3 py-20 items-center text-center min-h-screen space-y-0;
     grid-column-start: 1;
     grid-row-start: 1;
     grid-column-end: var(--col-end);
   }
 
-  .scroll_arrow{
+  .scroll-arrow{
     @apply cursor-pointer absolute bottom-2;
   }
 </style>

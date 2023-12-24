@@ -11,7 +11,7 @@
         </div >
 
         <!-- CONTENT -->
-        <div class="relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen"
+        <div class="bar-content"
             style="transition: left .5s ease-out;" :style="(opened || !mobile) ? 'left: 0;' : 'left: 100vw;'">
 
             <img src="https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/icons/Icon_A.png" name='A'
@@ -20,7 +20,7 @@
             <div class="space-y-0 w-full">
                 <div v-for='(button, index) in buttonsTab' :key='index'>
                     <div @click="scrollto(button.href); opened = !opened">
-                        <div class="button_normal" :class="index === 0 ? 'border-t':''">
+                        <div class="button-normal" :class="index === 0 ? 'border-t':''">
                             {{button.title}}
                         </div>
                     </div>
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             opened: false,
-            buttonsTab: data.navbar_buttons
+            buttonsTab: data.navbarButtons
         };
     },
 
@@ -71,7 +71,7 @@ export default {
         scrollto(destination){
             document.getElementById(destination).scrollIntoView({behavior: 'smooth'});
         },
-        get_pos(){
+        getPos(){
             if (!this.mobile || this.opened){
                 return '0';
             } else {
@@ -85,7 +85,7 @@ export default {
 
 <style scoped>
     /* scoped: les classes CSS definies ici ne s'appliquent pas dans les autres fichiers */
-    .button_normal{
+    .button-normal{
         /* @apply pour faire le tailwind */
         @apply cursor-pointer text-white border-white border-b py-3 text-opacity-75 hover:text-opacity-100;
         @apply w-full text-center min-w-full border-opacity-75;
@@ -95,7 +95,7 @@ export default {
         text-shadow: none;
         transition: all .5s ease-out;
     }
-    .button_normal:hover{
+    .button-normal:hover{
         @apply text-cyan;
         text-shadow: 0 0 0.2vw cyan;
     }
@@ -121,9 +121,15 @@ export default {
     .bar {
         @apply block absolute h-1 w-8 bg-current transform transition duration-500 ease-in-out;
     }
-    .content {
-        @apply flex flex-col sm:flex-row items-center w-full sm:w-auto shadow-lg sm:shadow-none pb-4 sm:pb-0 sm:px-10 space-y-4 sm:space-y-0;
+    .bar-content {
+        @apply relative h-screen bg-gray_moi-dark flex flex-col items-center space-y-6 py-6 sm:min-h-screen;
+        @apply sm:border-r-2 border-cyan;
     }
+    /* @media (min-width: 640px){
+        .bar-content {
+            border-right-width: 1px;
+        }
+    } */
     /* Slide transition */
     .slide-enter-active {
         -moz-transition-duration: 0.3s;
