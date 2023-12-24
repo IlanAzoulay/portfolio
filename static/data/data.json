@@ -68,6 +68,8 @@
             "filename": "Skade",
             "title": "SKADE.IO",
             "year": "2023",
+            "start": "September 2023",
+            "end": "December 2023",
             "post": "Full Stack & database developer",
             "description": "Developing the front-end, back-end, and database of an investors social network",
             "environment": "Vue.js - Nuxt.js - C# - .NET - SQL - Postgres"
@@ -76,6 +78,8 @@
             "filename": "Admire",
             "title": "ADMIRE",
             "year": "2022-2023",
+            "start": "December 2022",
+            "end": "August 2023",
             "post": "Full Stack & database developer",
             "description": "Developing the back-end and front-end of an online marketplace website",
             "environment": "Vue.js - Typescript - Nest.js - SQL - Prisma"
