@@ -109,10 +109,9 @@ export default {
 
     .grid-logos {
         @apply w-full py-3;
-        @apply grid grid-cols-2 sm:grid-cols-5;
+        @apply grid grid-cols-2 sm:grid-cols-6;
         @apply gap-x-1 gap-y-1;
     }
-
 
     h2 {
         @apply text-3xl sm:text-5xl text-cyan;
