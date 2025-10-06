@@ -38,6 +38,13 @@
             "description": "One of my first ambitious short films. A mental exercise to imagine what an Anarcho-Capitalist society would look like"
             },
             {
+            "filename": "Ancap2",
+			"title": "Anarcho-Capitalism 2",
+            "year": "2025",
+            "link": "https://youtu.be/Xd1nSBOG6VA",
+            "description": "My most ambitious movie to date. Sequel to my viral movie Anarcho-Capitalism"
+            },
+            {
             "filename": "HK",
 			"title": "Liberty Prime Liberates Hong Kong",
             "year": "2019",
@@ -50,13 +57,6 @@
             "year": "2020",
             "link": "https://youtu.be/AOyLTzRlGU4",
             "description": "A parody of US political pundit Ben Shapiro, known for 'destroying liberals'"
-            },
-            {
-            "filename": "Letov",
-			"title": "This Is For Your Own Good",
-            "year": "2021",
-            "link": "https://youtu.be/9MdiMweIzO0",
-            "description": "A modern re-imagining of Egor Letov's classic anti-dictatorship song, Всё идёт по плану (all goes as planned)"
             }
         ]
     },
@@ -64,6 +64,16 @@
     "projets": {
         "sourceLogos": "https://raw.githubusercontent.com/IlanAzoulay/portfolio/master/static/logos/Logo_",
         "listLogos": [
+            {
+            "filename": "Decathlon",
+            "title": "DECATHLON",
+            "year": "2024-2025",
+            "start": "February 2024",
+            "end": "July 2025",
+            "post": "3D developer",
+            "description": "Developing Blender add-ons and other tools for prototypes of new products",
+            "environment": "Blender - Python - Javascript"
+			},
 			{
             "filename": "Skade",
             "title": "SKADE.IO",
@@ -202,13 +212,13 @@
     "sphereItems": [
         "Software",
         "3D Dev",
-        "Interface",
-        "Front-end",
-        "Back-end",
+        "User Interface",
+        "Frontend",
+        "Backend",
         "Algorithms",
         "Procedural",
         "Database",
-        "Blockchain"
+        "Blender"
     ],
     "skills": [
         {

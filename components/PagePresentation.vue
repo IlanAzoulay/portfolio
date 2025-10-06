@@ -19,7 +19,6 @@
                     <li>Frontend</li>
                     <li>3D</li>
                     <li>Software</li>
-                    <li>Blockchain</li>
                 </ul>
 
                 <br>
